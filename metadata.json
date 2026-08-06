@@ -1,0 +1,6 @@
+{
+  "name": "Why Dhaka Keeps Growing",
+  "description": "An interactive scrollytelling data story explaining the case for a decentralized Bangladesh, analyzing migration drivers, centralization feedback loops, and regional potential.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
