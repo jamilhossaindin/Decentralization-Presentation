@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { Image, Maximize2, Sparkles, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PhotoItem {
@@ -110,9 +111,12 @@ export default function PhotoGallery() {
 
       {/* Grid of Graphic Assets */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredPhotos.map((photo) => (
-          <div
+        {filteredPhotos.map((photo, idx) => (
+          <motion.div
             key={photo.id}
+            initial={{ opacity: 0, scale: 0.96, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: idx * 0.04, duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
             onClick={() => setSelectedPhoto(photo)}
             className="group relative rounded-2xl bg-white border border-black/10 p-4 space-y-3 shadow-sm hover:shadow-md hover:border-[#1746A2]/40 transition-all cursor-pointer overflow-hidden"
           >
@@ -139,7 +143,7 @@ export default function PhotoGallery() {
               </div>
               <p className="text-xs text-gray-700 leading-relaxed font-sans">{photo.caption}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 

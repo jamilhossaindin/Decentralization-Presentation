@@ -5,7 +5,11 @@ import { Briefcase, GraduationCap, HeartPulse, TrendingUp } from "lucide-react";
 interface TreeNode {
   id: string;
   label: string;
+  percentage: number;
   icon: React.ReactNode;
+  barColor: string;
+  lightBg: string;
+  badgeColor: string;
   investigation: {
     title: string;
     subtitle: string;
@@ -21,8 +25,12 @@ export default function InvestigativeTree() {
   const nodes: TreeNode[] = [
     {
       id: "jobs",
-      label: "Jobs & Industry",
+      label: "Jobs & HQ Concentration",
+      percentage: 78,
       icon: <Briefcase className="w-4 h-4 text-[#1746A2]" />,
+      barColor: "bg-[#1746A2]",
+      lightBg: "bg-blue-50 border-blue-200",
+      badgeColor: "bg-[#1746A2] text-white",
       investigation: {
         title: "The Industrial Deserts",
         subtitle: "Corporate offices and factories choose Dhaka first",
@@ -33,8 +41,12 @@ export default function InvestigativeTree() {
     },
     {
       id: "education",
-      label: "Top Tier Education",
+      label: "Top Tier Scholar Migration",
+      percentage: 70,
       icon: <GraduationCap className="w-4 h-4 text-emerald-700" />,
+      barColor: "bg-emerald-600",
+      lightBg: "bg-emerald-50 border-emerald-200",
+      badgeColor: "bg-emerald-700 text-white",
       investigation: {
         title: "The Academic Monopoly",
         subtitle: "Why 18-year-olds are forced to migrate for knowledge",
@@ -45,8 +57,12 @@ export default function InvestigativeTree() {
     },
     {
       id: "healthcare",
-      label: "Specialized Healthcare",
+      label: "Medical Specialist Concentration",
+      percentage: 68,
       icon: <HeartPulse className="w-4 h-4 text-[#DC2626]" />,
+      barColor: "bg-[#DC2626]",
+      lightBg: "bg-red-50 border-red-200",
+      badgeColor: "bg-[#DC2626] text-white",
       investigation: {
         title: "Medical Centralization",
         subtitle: "Life-saving care shouldn't depend on a highway trip",
@@ -57,8 +73,12 @@ export default function InvestigativeTree() {
     },
     {
       id: "business",
-      label: "Venture Investment",
-      icon: <TrendingUp className="w-4 h-4 text-amber-700" />,
+      label: "Venture Capital & Credit Monopoly",
+      percentage: 84,
+      icon: <TrendingUp className="w-4 h-4 text-amber-800" />,
+      barColor: "bg-amber-600",
+      lightBg: "bg-amber-50 border-amber-200",
+      badgeColor: "bg-amber-800 text-white",
       investigation: {
         title: "Credit and Startup Capital",
         subtitle: "Where loans and investments are signed",
@@ -72,61 +92,90 @@ export default function InvestigativeTree() {
   const activeNode = nodes.find((n) => n.id === selectedNode) || nodes[0];
 
   return (
-    <div className="w-full flex flex-col lg:flex-row items-stretch gap-6 min-h-[420px] font-sans">
-      {/* LEFT: Mind Map Node Selector */}
-      <div className="flex-1 flex flex-col justify-center items-center relative p-6 rounded-2xl bg-white border border-black/15 shadow-sm min-h-[300px]">
-        <div className="absolute top-3 left-4 text-[9px] font-mono text-gray-500 uppercase font-bold tracking-widest">
-          INVESTIGATIVE MAP NODE SELECTOR
+    <div className="w-full flex flex-col lg:flex-row items-stretch gap-6 min-h-[440px] font-sans">
+      {/* LEFT COLUMN: Horizontal 0-100% Line Bar Gauge Selector */}
+      <div className="flex-1 p-6 rounded-2xl bg-white border border-black/15 shadow-sm space-y-4 flex flex-col justify-between">
+        <div className="space-y-1 border-b border-black/10 pb-3">
+          <div className="flex justify-between items-center">
+            <span className="text-xs font-mono text-[#1746A2] font-bold uppercase tracking-widest">
+              DHAKA MONOPOLY GAUGE (0 – 100%)
+            </span>
+            <span className="text-[10px] font-mono text-gray-500 font-bold">CLICK ROW TO INSPECT</span>
+          </div>
+          {/* Axis Scale Markers */}
+          <div className="flex justify-between text-[9px] font-mono text-gray-400 font-bold pt-1">
+            <span>0%</span>
+            <span>25%</span>
+            <span>50%</span>
+            <span>75%</span>
+            <span>100%</span>
+          </div>
         </div>
 
-        {/* Central Hub */}
-        <div className="z-10 mb-6 p-4 rounded-2xl bg-[#EBE7DF] border-2 border-black text-center space-y-1 shadow-md">
-          <span className="text-[10px] font-mono text-[#DC2626] font-bold uppercase tracking-widest">ROOT CAUSE</span>
-          <h3 className="text-lg font-bold font-display text-black">Why Migration Happens</h3>
-        </div>
-
-        {/* 4 Clickable Node Buttons */}
-        <div className="grid grid-cols-2 gap-3 w-full z-10">
+        {/* 4 Horizontal Line Gauge Rows */}
+        <div className="space-y-3.5 my-auto">
           {nodes.map((node) => {
             const isSelected = selectedNode === node.id;
             return (
-              <button
+              <div
                 key={node.id}
                 onClick={() => setSelectedNode(node.id)}
-                className={`p-3.5 rounded-xl border text-left flex items-center gap-3 transition-all cursor-pointer ${
+                className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2 ${
                   isSelected
-                    ? "bg-[#1746A2] text-white border-[#1746A2] font-bold shadow-md scale-[1.02]"
-                    : "bg-white text-black border-black/15 hover:border-black/40 hover:bg-black/5"
+                    ? "bg-white border-black shadow-md scale-[1.01]"
+                    : "bg-[#EBE7DF]/50 border-black/10 hover:border-black/30 hover:bg-white"
                 }`}
               >
-                <div className={`p-2 rounded-lg ${isSelected ? "bg-white/20" : "bg-black/5"}`}>
-                  {node.icon}
+                {/* Row Header */}
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <div className={`p-1.5 rounded-md ${isSelected ? "bg-black text-white" : "bg-black/5 text-black"}`}>
+                      {node.icon}
+                    </div>
+                    <span className={`text-xs font-bold font-serif ${isSelected ? "text-black" : "text-gray-700"}`}>
+                      {node.label}
+                    </span>
+                  </div>
+                  <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${node.badgeColor}`}>
+                    {node.percentage}%
+                  </span>
                 </div>
-                <div>
-                  <h4 className="text-xs font-bold font-mono uppercase">{node.label}</h4>
-                  <p className="text-[9px] opacity-80 font-mono">CLICK TO INSPECT</p>
+
+                {/* Horizontal Progress Track */}
+                <div className="h-3 w-full bg-[#EBE7DF] rounded-full overflow-hidden p-0.5 border border-black/10">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${node.percentage}%` }}
+                    transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+                    className={`h-full ${node.barColor} rounded-full`}
+                  />
                 </div>
-              </button>
+              </div>
             );
           })}
         </div>
+
+        <div className="pt-2 border-t border-black/10 text-[10px] font-mono text-gray-500 flex justify-between font-bold">
+          <span>STRUCTURAL ANALYSIS</span>
+          <span className="text-[#1746A2]">SELECTED: {activeNode.percentage}% MONOPOLY</span>
+        </div>
       </div>
 
-      {/* RIGHT: Detailed Findings Dossier */}
+      {/* RIGHT COLUMN: Dossier Finding Card (Matching Screenshot) */}
       <div className="flex-1 p-6 rounded-2xl bg-white border border-black/15 shadow-sm space-y-4 flex flex-col justify-between">
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="flex justify-between items-center">
             <span className="text-xs font-mono text-[#1746A2] font-bold uppercase tracking-widest">DOSSIER FINDING</span>
-            <span className="text-[10px] font-mono text-gray-500">GRD-3216 ARCHIVE</span>
+            <span className="text-[10px] font-mono text-gray-400 uppercase">GRD-3216 ARCHIVE</span>
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
               key={activeNode.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
+              initial={{ opacity: 0, scale: 0.97, y: 4 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: -4 }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
               className="space-y-3"
             >
               <div>
@@ -135,28 +184,31 @@ export default function InvestigativeTree() {
               </div>
 
               <div className="space-y-2 text-xs font-sans">
-                <div className="p-3 rounded-xl bg-[#EBE7DF] border border-black/10 space-y-1">
-                  <span className="text-[10px] font-mono text-[#DC2626] uppercase font-bold">STRUCTURAL PROBLEM</span>
-                  <p className="text-gray-800 leading-relaxed">{activeNode.investigation.problem}</p>
+                {/* Structural Problem Card */}
+                <div className="p-3.5 rounded-xl bg-[#EBE7DF]/80 border border-black/10 space-y-1">
+                  <span className="text-[10px] font-mono text-[#DC2626] uppercase font-bold tracking-wider">STRUCTURAL PROBLEM</span>
+                  <p className="text-gray-800 leading-relaxed font-sans">{activeNode.investigation.problem}</p>
                 </div>
 
-                <div className="p-3 rounded-xl bg-blue-50 border border-[#1746A2]/20 space-y-1">
-                  <span className="text-[10px] font-mono text-[#1746A2] uppercase font-bold">STATISTICAL FACT</span>
-                  <p className="text-gray-800 leading-relaxed">{activeNode.investigation.fact}</p>
+                {/* Statistical Fact Card */}
+                <div className="p-3.5 rounded-xl bg-blue-50/80 border border-blue-200 space-y-1">
+                  <span className="text-[10px] font-mono text-[#1746A2] uppercase font-bold tracking-wider">STATISTICAL FACT</span>
+                  <p className="text-gray-800 leading-relaxed font-sans">{activeNode.investigation.fact}</p>
                 </div>
 
-                <div className="p-3 rounded-xl bg-amber-50 border border-amber-500/20 space-y-1">
-                  <span className="text-[10px] font-mono text-amber-800 uppercase font-bold">SYSTEMIC CONSEQUENCE</span>
-                  <p className="text-gray-800 leading-relaxed">{activeNode.investigation.consequence}</p>
+                {/* Systemic Consequence Card */}
+                <div className="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200 space-y-1">
+                  <span className="text-[10px] font-mono text-amber-800 uppercase font-bold tracking-wider">SYSTEMIC CONSEQUENCE</span>
+                  <p className="text-gray-800 leading-relaxed font-sans">{activeNode.investigation.consequence}</p>
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        <div className="pt-2 border-t border-black/10 text-[10px] font-mono text-gray-500 flex justify-between">
+        <div className="pt-2 border-t border-black/10 text-[10px] font-mono text-gray-500 flex justify-between font-bold">
           <span>TEAM-V SOCIAL IMPACT REPORT</span>
-          <span className="text-[#1746A2] font-bold">DATA VERIFIED</span>
+          <span className="text-[#1746A2]">DATA VERIFIED</span>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { Play, Video, Film, Sparkles, Volume2, Clock } from "lucide-react";
 
 interface VideoItem {
@@ -60,9 +61,12 @@ export default function VideoGallery() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {videoList.map((vid) => (
-          <div
+        {videoList.map((vid, idx) => (
+          <motion.div
             key={vid.id}
+            initial={{ opacity: 0, scale: 0.96, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: idx * 0.05, duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
             onClick={() => {
               setActiveVideo(vid);
               setIsPlaying(false);
@@ -95,7 +99,7 @@ export default function VideoGallery() {
               <span className="text-[10px] font-mono text-gray-500 uppercase block">STORYBOARD SUMMARY:</span>
               <p className="text-xs text-gray-700 leading-normal line-clamp-2">{vid.storyboard}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
