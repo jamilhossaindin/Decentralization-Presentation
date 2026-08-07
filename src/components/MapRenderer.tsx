@@ -232,13 +232,6 @@ export default function MapRenderer({
             <circle
               cx={260}
               cy={285}
-              r={16}
-              fill="rgba(239, 68, 68, 0.25)"
-              className="animate-ping"
-            />
-            <circle
-              cx={260}
-              cy={285}
               r={8}
               fill="#ef4444"
               filter="url(#glow)"
@@ -439,35 +432,42 @@ export default function MapRenderer({
           </g>
         )}
 
-        {/* --- SECTION 6: DIVISION LABELS OR EMBELLISHMENTS --- */}
+        {/* --- SECTION 6: HIGH-CONTRAST DIVISION LABELS --- */}
         <g id="labels-group" className="pointer-events-none">
           {regions.map((region) => {
             const isHovered = hoveredRegion?.id === region.id;
             const isSelected = selectedRegionId === region.id;
-            const size = isHovered || isSelected ? "text-[10px] font-semibold" : "text-[8px] font-medium";
-            const color = isSelected
-              ? region.id === "dhaka" ? "fill-red-400" : "fill-emerald-400"
+            const isDhaka = region.id === "dhaka";
+
+            const pillBg = isSelected
+              ? isDhaka ? "#DC2626" : "#1746A2"
               : isHovered
-              ? "fill-white"
-              : "fill-gray-400";
+              ? "#1746A2"
+              : "#111111";
+
+            const pillWidth = isHovered || isSelected ? 80 : 72;
+            const pillHeight = isHovered || isSelected ? 18 : 16;
+            const fontSize = isHovered || isSelected ? "text-[10px] font-extrabold" : "text-[9px] font-bold";
 
             return (
               <g key={`lbl-${region.id}`}>
-                {/* Micro background pill for text contrast */}
+                {/* Micro background pill for maximum high-contrast text legibility */}
                 <rect
-                  x={region.x - 30}
-                  y={region.y - (isHovered || isSelected ? 17 : 14)}
-                  width={60}
-                  height={10}
-                  rx={2}
-                  fill="rgba(9, 13, 22, 0.65)"
-                  className="transition-all duration-300"
+                  x={region.x - pillWidth / 2}
+                  y={region.y - (isHovered || isSelected ? 20 : 18)}
+                  width={pillWidth}
+                  height={pillHeight}
+                  rx={4}
+                  fill={pillBg}
+                  stroke="#FFFFFF"
+                  strokeWidth={0.75}
+                  className="transition-all duration-200 shadow-md"
                 />
                 <text
                   x={region.x}
-                  y={region.y - (isHovered || isSelected ? 10 : 8)}
+                  y={region.y - (isHovered || isSelected ? 8 : 7)}
                   textAnchor="middle"
-                  className={`${size} ${color} font-mono tracking-wide shadow-md transition-all duration-300`}
+                  className={`${fontSize} fill-white font-mono tracking-wider transition-all duration-200`}
                 >
                   {region.name}
                 </text>
@@ -477,31 +477,31 @@ export default function MapRenderer({
         </g>
       </svg>
 
-      {/* Embedded visual tooltip card for mouse hovers on desktop */}
+      {/* Embedded high-contrast visual tooltip card for desktop & mobile */}
       <AnimatePresence>
         {hoveredRegion && !selectedRegionId && (
           <motion.div
-            initial={{ opacity: 0, y: 15, scale: 0.95 }}
+            initial={{ opacity: 0, y: 12, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="absolute bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-64 p-3 rounded-xl bg-dark-bg/95 border border-dark-border shadow-2xl backdrop-blur-xl z-20"
+            exit={{ opacity: 0, y: 8, scale: 0.96 }}
+            transition={{ duration: 0.18 }}
+            className="absolute bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-72 p-4 rounded-xl bg-white border border-black/20 shadow-xl z-30 space-y-1.5"
           >
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-semibold text-white font-display">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-bold text-black font-sans tracking-tight">
                 {hoveredRegion.name}
               </span>
-              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-gray-300">
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#1746A2]/10 text-[#1746A2] border border-[#1746A2]/30 uppercase">
                 District Core
               </span>
             </div>
-            <p className="text-[10px] text-gray-300 line-clamp-2 leading-relaxed font-sans">
+            <p className="text-xs text-gray-800 font-sans font-medium leading-relaxed">
               {hoveredRegion.tagline}
             </p>
             {activeLayer !== "none" && (
-              <div className="mt-2 pt-1.5 border-t border-white/5 flex justify-between items-center text-[9px] font-mono">
-                <span className="text-gray-400 capitalize">{activeLayer}:</span>
-                <span className={`${hoveredRegion.id === 'dhaka' ? 'text-red-400 font-bold' : 'text-emerald-400'}`}>
+              <div className="pt-2 border-t border-black/10 flex justify-between items-center text-xs font-mono">
+                <span className="text-gray-700 font-bold uppercase">{activeLayer}:</span>
+                <span className={`font-bold ${hoveredRegion.id === 'dhaka' ? 'text-[#DC2626]' : 'text-[#006A4E]'}`}>
                   {getIntensityValue(hoveredRegion)}% concentration
                 </span>
               </div>

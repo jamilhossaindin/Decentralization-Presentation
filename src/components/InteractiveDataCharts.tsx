@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { BarChart3, PieChart, TrendingUp, Activity, Filter, Info, Sparkles } from "lucide-react";
+import { BarChart3, PieChart, TrendingUp, Activity, Filter, Info, Sparkles, AlertCircle } from "lucide-react";
 
 export default function InteractiveDataCharts() {
   const [activeTab, setActiveTab] = useState<"migration" | "economic" | "radar" | "funnel">("migration");
@@ -43,7 +43,7 @@ export default function InteractiveDataCharts() {
   ];
 
   return (
-    <div className="flex flex-col gap-2.5 font-sans mt-2.5">
+    <div className="flex flex-col gap-2.5 font-sans mt-2.5 mb-0">
       {/* Sub-Navigation Bar */}
       <div className="flex items-center gap-2.5 overflow-x-auto">
         <button
@@ -90,8 +90,8 @@ export default function InteractiveDataCharts() {
               : "bg-white text-gray-700 border border-black/10 hover:bg-black/5"
           }`}
         >
-          <TrendingUp className="w-3.5 h-3.5" />
-          4. AIDA Conversion Funnel
+          <AlertCircle className="w-3.5 h-3.5 text-red-500" />
+          4. District Opportunity Deficit
         </button>
 
         <button
@@ -292,29 +292,37 @@ export default function InteractiveDataCharts() {
 
           {/* Interactive Multi-Bar Scorecard */}
           <div className="space-y-3 pt-2">
-            <div className="p-3 rounded-xl bg-blue-50 border border-blue-200 text-xs font-mono">
-              <span className="text-[#1746A2] font-bold">DIVISION HIGHLIGHT: </span>
-              <span className="text-black font-semibold">{divisionData[selectedDivision].highlight}</span>
+            <div className="p-3 rounded-xl bg-blue-50 border border-blue-200 text-xs font-mono flex justify-between items-center">
+              <div>
+                <span className="text-[#1746A2] font-bold">DIVISION HIGHLIGHT: </span>
+                <span className="text-black font-semibold">{divisionData[selectedDivision].highlight}</span>
+              </div>
+              <span className="text-[10px] font-bold text-gray-500 uppercase">SPECTRUM GRADIENT</span>
             </div>
 
+            {/* Scorecard Bars with 5-Color Gradient Scale */}
             {[
-              { label: "AGRITECH & FOOD INNOVATION", val: divisionData[selectedDivision].agritech, color: "bg-emerald-600" },
-              { label: "REMOTE TECH & FREELANCING", val: divisionData[selectedDivision].tech, color: "bg-[#1746A2]" },
-              { label: "MARITIME & LOGISTICS", val: divisionData[selectedDivision].logistics, color: "bg-amber-600" },
-              { label: "MEDICAL & ICU DENSITY", val: divisionData[selectedDivision].medical, color: "bg-[#DC2626]" },
-              { label: "HIGHER EDUCATION & CAMPUSES", val: divisionData[selectedDivision].edu, color: "bg-purple-600" }
+              { label: "AGRITECH & FOOD INNOVATION", val: divisionData[selectedDivision].agritech },
+              { label: "REMOTE TECH & FREELANCING", val: divisionData[selectedDivision].tech },
+              { label: "MARITIME & LOGISTICS", val: divisionData[selectedDivision].logistics },
+              { label: "MEDICAL & ICU DENSITY", val: divisionData[selectedDivision].medical },
+              { label: "HIGHER EDUCATION & CAMPUSES", val: divisionData[selectedDivision].edu }
             ].map((metric, idx) => (
               <div key={idx} className="space-y-1">
-                <div className="flex justify-between text-[11px] font-mono text-gray-700 font-bold">
+                <div className="flex justify-between text-[11px] font-mono text-gray-800 font-bold">
                   <span>{metric.label}</span>
-                  <span>{metric.val} / 100</span>
+                  <span className="text-[#1746A2]">{metric.val} / 100</span>
                 </div>
-                <div className="h-2.5 w-full bg-[#EBE7DF] rounded-full overflow-hidden">
+                <div className="h-3.5 w-full bg-[#EBE7DF] rounded-full overflow-hidden p-0.5 border border-black/15 shadow-inner">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${metric.val}%` }}
-                    transition={{ duration: 0.4, delay: idx * 0.05 }}
-                    className={`h-full ${metric.color} rounded-full`}
+                    transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.23, 1, 0.32, 1] }}
+                    className="h-full rounded-full shadow-xs"
+                    style={{
+                      background: "linear-gradient(to right, #ee312f 0%, #f5771d 25%, #ffe600 50%, #d8dc25 75%, #b1d34a 100%)",
+                      backgroundSize: `${(100 / Math.max(metric.val, 1)) * 100}% 100%`
+                    }}
                   />
                 </div>
               </div>
@@ -323,37 +331,92 @@ export default function InteractiveDataCharts() {
         </div>
       )}
 
-      {/* CHART 4: AIDA CONVERSION FUNNEL WATERFALL */}
+      {/* CHART 4: DISTRICT OPPORTUNITY DEFICIT PROBLEM GRAPH */}
       {activeTab === "funnel" && (
-        <div className="p-5 rounded-2xl bg-white border border-black/15 shadow-sm space-y-4">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+        <div className="p-5 rounded-2xl bg-white border border-black/15 shadow-sm space-y-4 font-sans">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-black/10 pb-2.5">
             <div>
-              <span className="text-[10px] font-mono text-[#DC2626] uppercase font-bold tracking-widest">
-                INTERACTIVE DATA GRAPH #04
+              <span className="text-[10px] font-mono text-[#DC2626] uppercase font-bold tracking-widest flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-pulse" />
+                INTERACTIVE DATA GRAPH #04 (PROBLEM IDENTIFICATION)
               </span>
-              <h3 className="text-lg font-bold font-serif text-black">AIDA Campaign Conversion Pipeline</h3>
+              <h3 className="text-lg font-bold font-serif text-black">District Opportunity Deficit & Inequality Gap</h3>
             </div>
-            <span className="text-xs font-mono text-gray-500 font-bold">OMNICHANNEL CONVERSION</span>
+            <span className="text-xs font-mono text-[#DC2626] font-bold bg-red-50 px-2 py-0.5 rounded border border-red-200">
+              63 DISTRICTS STARVED vs 1 METRO
+            </span>
           </div>
 
-          <div className="space-y-3 pt-2">
-            {funnelStages.map((stage, idx) => (
-              <div key={idx} className="p-3.5 rounded-xl bg-[#EBE7DF] border border-black/10 space-y-2">
-                <div className="flex justify-between items-center text-xs font-mono">
-                  <span className="font-bold text-black uppercase">
-                    STAGE 0{idx + 1}: {stage.stage}
+          {/* 4 Problem Deficit Pillars */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+            {[
+              {
+                title: "CORPORATE JOB HQS",
+                dhakaPct: 78,
+                districtPct: 22,
+                dhakaLabel: "78% Dhaka",
+                districtLabel: "22% Districts",
+                desc: "Severe employment shortage outside capital."
+              },
+              {
+                title: "COMMERCIAL BANK CREDIT",
+                dhakaPct: 84,
+                districtPct: 16,
+                dhakaLabel: "84% Dhaka",
+                districtLabel: "16% Districts",
+                desc: "Venture loans denied to regional startups."
+              },
+              {
+                title: "SPECIALIST DOCTORS",
+                dhakaPct: 68,
+                districtPct: 32,
+                dhakaLabel: "68% Dhaka",
+                districtLabel: "32% Districts",
+                desc: "Regional families forced to travel for ICU."
+              },
+              {
+                title: "HSC TOP SCHOLARS",
+                dhakaPct: 70,
+                districtPct: 30,
+                dhakaLabel: "70% Drain to Dhaka",
+                districtLabel: "30% Local",
+                desc: "82% regional graduate brain drain."
+              }
+            ].map((pillar, idx) => (
+              <div key={idx} className="p-3.5 rounded-xl bg-[#EBE7DF] border border-black/10 flex flex-col justify-between h-56 relative overflow-hidden">
+                <div className="space-y-1">
+                  <span className="text-[9px] font-mono text-[#DC2626] font-bold uppercase tracking-wider block">
+                    DEFICIT AREA 0{idx + 1}
                   </span>
-                  <span className="font-bold text-[#1746A2]">{stage.count}</span>
+                  <h4 className="text-xs font-bold text-black font-mono leading-tight">{pillar.title}</h4>
                 </div>
-                <div className="h-3 w-full bg-white rounded-full overflow-hidden p-0.5 border border-black/10">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${stage.pct}%` }}
-                    transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className={`h-full ${stage.color} rounded-full`}
-                  />
+
+                {/* Dual Bar Comparison */}
+                <div className="my-2 space-y-1.5">
+                  <div className="flex justify-between text-[10px] font-mono font-bold">
+                    <span className="text-[#DC2626]">{pillar.dhakaLabel}</span>
+                    <span className="text-[#1746A2]">{pillar.districtLabel}</span>
+                  </div>
+
+                  <div className="h-4 w-full bg-white rounded-lg overflow-hidden flex p-0.5 border border-black/10">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${pillar.dhakaPct}%` }}
+                      transition={{ duration: 0.5, delay: idx * 0.08 }}
+                      className="h-full bg-[#DC2626] rounded-l-md flex items-center justify-center"
+                    />
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${pillar.districtPct}%` }}
+                      transition={{ duration: 0.5, delay: idx * 0.08 + 0.1 }}
+                      className="h-full bg-[#1746A2] rounded-r-md flex items-center justify-center"
+                    />
+                  </div>
                 </div>
-                <p className="text-[11px] text-gray-600 font-sans">{stage.note}</p>
+
+                <p className="text-[10px] text-gray-700 font-sans leading-tight border-t border-black/10 pt-2">
+                  {pillar.desc}
+                </p>
               </div>
             ))}
           </div>

@@ -93,46 +93,87 @@ export default function InvestigativeTree() {
 
   return (
     <div className="w-full flex flex-col lg:flex-row items-stretch gap-6 min-h-[440px] font-sans">
-      {/* LEFT COLUMN: Horizontal 0-100% Line Bar Gauge Selector */}
+      {/* LEFT COLUMN: Interactive Pie / Donut Chart Selector */}
       <div className="flex-1 p-6 rounded-2xl bg-white border border-black/15 shadow-sm space-y-4 flex flex-col justify-between">
-        <div className="space-y-1 border-b border-black/10 pb-3">
-          <div className="flex justify-between items-center">
-            <span className="text-xs font-mono text-[#1746A2] font-bold uppercase tracking-widest">
-              DHAKA MONOPOLY GAUGE (0 – 100%)
-            </span>
-            <span className="text-[10px] font-mono text-gray-500 font-bold">CLICK ROW TO INSPECT</span>
-          </div>
-          {/* Axis Scale Markers */}
-          <div className="flex justify-between text-[9px] font-mono text-gray-400 font-bold pt-1">
-            <span>0%</span>
-            <span>25%</span>
-            <span>50%</span>
-            <span>75%</span>
-            <span>100%</span>
-          </div>
+        <div className="flex justify-between items-center border-b border-black/10 pb-2.5">
+          <span className="text-xs font-mono text-[#1746A2] font-bold uppercase tracking-widest flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#1746A2] animate-pulse" />
+            DHAKA MONOPOLY PIE CHART (0 – 100%)
+          </span>
+          <span className="text-[10px] font-mono text-gray-500 font-bold">CLICK SLICE TO INSPECT</span>
         </div>
 
-        {/* 4 Horizontal Line Gauge Rows */}
-        <div className="space-y-3.5 my-auto">
-          {nodes.map((node) => {
-            const isSelected = selectedNode === node.id;
-            return (
-              <div
-                key={node.id}
-                onClick={() => setSelectedNode(node.id)}
-                className={`p-3.5 rounded-xl border transition-all cursor-pointer space-y-2 ${
-                  isSelected
-                    ? "bg-white border-black shadow-md scale-[1.01]"
-                    : "bg-[#EBE7DF]/50 border-black/10 hover:border-black/30 hover:bg-white"
-                }`}
-              >
-                {/* Row Header */}
-                <div className="flex justify-between items-center">
+        {/* SVG Donut Pie Visual */}
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center my-auto">
+          <div className="sm:col-span-5 flex justify-center relative py-2">
+            <svg viewBox="0 0 100 100" className="w-44 h-44 -rotate-90">
+              {/* Donut Slice 1: Jobs (78%) */}
+              <circle
+                cx="50" cy="50" r="36" stroke="#1746A2" strokeWidth="16" fill="none"
+                strokeDasharray="226.2" strokeDashoffset={226.2 * (1 - 0.78 * 0.25)}
+                className={`transition-all duration-300 cursor-pointer ${selectedNode === 'jobs' ? 'stroke-[20] opacity-100' : 'opacity-65 hover:opacity-100'}`}
+                onClick={() => setSelectedNode('jobs')}
+              />
+              {/* Donut Slice 2: Education (70%) */}
+              <circle
+                cx="50" cy="50" r="36" stroke="#059669" strokeWidth="16" fill="none"
+                strokeDasharray="226.2" strokeDashoffset={226.2 * (1 - 0.70 * 0.25)}
+                transform="rotate(90 50 50)"
+                className={`transition-all duration-300 cursor-pointer ${selectedNode === 'education' ? 'stroke-[20] opacity-100' : 'opacity-65 hover:opacity-100'}`}
+                onClick={() => setSelectedNode('education')}
+              />
+              {/* Donut Slice 3: Healthcare (68%) */}
+              <circle
+                cx="50" cy="50" r="36" stroke="#DC2626" strokeWidth="16" fill="none"
+                strokeDasharray="226.2" strokeDashoffset={226.2 * (1 - 0.68 * 0.25)}
+                transform="rotate(180 50 50)"
+                className={`transition-all duration-300 cursor-pointer ${selectedNode === 'healthcare' ? 'stroke-[20] opacity-100' : 'opacity-65 hover:opacity-100'}`}
+                onClick={() => setSelectedNode('healthcare')}
+              />
+              {/* Donut Slice 4: Business (84%) */}
+              <circle
+                cx="50" cy="50" r="36" stroke="#D97706" strokeWidth="16" fill="none"
+                strokeDasharray="226.2" strokeDashoffset={226.2 * (1 - 0.84 * 0.25)}
+                transform="rotate(270 50 50)"
+                className={`transition-all duration-300 cursor-pointer ${selectedNode === 'business' ? 'stroke-[20] opacity-100' : 'opacity-65 hover:opacity-100'}`}
+                onClick={() => setSelectedNode('business')}
+              />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center">
+              <span className="text-2xl font-bold font-mono text-black leading-none">{activeNode.percentage}%</span>
+              <span className="text-[9px] font-mono text-gray-500 font-bold uppercase mt-1">DHAKA MONOPOLY</span>
+            </div>
+          </div>
+
+          {/* Interactive Pie Slice Legend Grid */}
+          <div className="sm:col-span-7 space-y-2">
+            {nodes.map((node) => {
+              const isSelected = selectedNode === node.id;
+              return (
+                <div
+                  key={node.id}
+                  onClick={() => setSelectedNode(node.id)}
+                  className={`p-2.5 rounded-xl border flex items-center justify-between transition-all cursor-pointer ${
+                    isSelected
+                      ? "bg-white border-black shadow-sm font-bold scale-[1.01]"
+                      : "bg-[#EBE7DF]/60 border-black/10 hover:bg-white"
+                  }`}
+                >
                   <div className="flex items-center gap-2">
-                    <div className={`p-1.5 rounded-md ${isSelected ? "bg-black text-white" : "bg-black/5 text-black"}`}>
-                      {node.icon}
-                    </div>
-                    <span className={`text-xs font-bold font-serif ${isSelected ? "text-black" : "text-gray-700"}`}>
+                    <span
+                      className="w-3 h-3 rounded-full flex-shrink-0"
+                      style={{
+                        backgroundColor:
+                          node.id === "jobs"
+                            ? "#1746A2"
+                            : node.id === "education"
+                            ? "#059669"
+                            : node.id === "healthcare"
+                            ? "#DC2626"
+                            : "#D97706"
+                      }}
+                    />
+                    <span className={`text-xs font-serif ${isSelected ? "text-black font-bold" : "text-gray-700"}`}>
                       {node.label}
                     </span>
                   </div>
@@ -140,23 +181,13 @@ export default function InvestigativeTree() {
                     {node.percentage}%
                   </span>
                 </div>
-
-                {/* Horizontal Progress Track */}
-                <div className="h-3 w-full bg-[#EBE7DF] rounded-full overflow-hidden p-0.5 border border-black/10">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${node.percentage}%` }}
-                    transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
-                    className={`h-full ${node.barColor} rounded-full`}
-                  />
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         <div className="pt-2 border-t border-black/10 text-[10px] font-mono text-gray-500 flex justify-between font-bold">
-          <span>STRUCTURAL ANALYSIS</span>
+          <span>PIE CHART ANALYSIS</span>
           <span className="text-[#1746A2]">SELECTED: {activeNode.percentage}% MONOPOLY</span>
         </div>
       </div>

@@ -305,7 +305,7 @@ export default function App() {
 
               {/* --- PAGE 04: PROBLEM IDENTIFICATION & INTERACTIVE GRAPHS --- */}
               {currentSlide === 3 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
+                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col space-y-2.5 justify-start">
                   <div className="flex justify-between items-start">
                     <div className="space-y-2.5">
                       <span className="text-xs font-mono text-[#DC2626] uppercase tracking-widest font-bold">04. Interactive Facts & Visual Graphs</span>
@@ -320,7 +320,7 @@ export default function App() {
                       </span>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-2.5 mb-0">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 my-0">
                     {/* Ticker 1: Live Density */}
                     <div className="p-3.5 rounded-xl bg-white border border-black/15 shadow-sm space-y-1 relative overflow-hidden group">
                       <div className="flex justify-between items-center">
@@ -668,20 +668,6 @@ export default function App() {
           <span className="text-xs text-black font-semibold hidden sm:inline ml-2 truncate max-w-[220px]">
             — {slideHeaders[currentSlide].substring(4)}
           </span>
-        </div>
-
-        {/* Stepper Dots */}
-        <div className="hidden lg:flex items-center gap-1">
-          {Array.from({ length: totalSlides }).map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => navigateToSlide(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                currentSlide === idx ? "w-5 bg-[#1746A2]" : "w-1.5 bg-black/20 hover:bg-black/40"
-              }`}
-              title={`Jump to Page ${idx + 1}`}
-            />
-          ))}
         </div>
 
         {/* Next / Prev Navigation */}
