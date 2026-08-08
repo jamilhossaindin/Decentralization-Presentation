@@ -569,11 +569,11 @@ export default function App() {
 
               {/* --- PAGE 11: CREATIVE CONTENT DESIGN — PHOTO GALLERY --- */}
               {currentSlide === 10 && (
-                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
-                  <div className="space-y-2.5">
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-start space-y-3">
+                  <div className="space-y-1">
                     <h2 className="text-2xl font-bold font-display text-[#16C79A]">Photo Gallery: <span className="text-white">Static & Print Creatives</span></h2>
                   </div>
-                  <div className="my-2.5">
+                  <div className="flex-1 flex flex-col justify-center">
                     <PhotoGallery />
                   </div>
                 </div>
