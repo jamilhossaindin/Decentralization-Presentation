@@ -20,8 +20,8 @@ export default function PhotoGallery() {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col justify-center my-auto">
-      {/* 2 Rows x 3 Galleries (Pure Images, No Text) */}
+    <div className="w-full space-y-4 pb-8">
+      {/* 2 Rows x 3 Galleries (Pure Images, No Text with smooth scroll) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {photos.map((photo, idx) => (
           <motion.div
