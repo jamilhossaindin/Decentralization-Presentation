@@ -168,7 +168,7 @@ export default function App() {
     "06. Spatial Inequality",
     "07. Digital Careers",
     "08. Paradigm Shift",
-    "09. Strategy: SWOT & 4Ps",
+    "09. Strategy",
     "10. Audience & AIDA Model",
     "11. Content Design: Photo Gallery",
     "12. Content Design: Video Gallery",
