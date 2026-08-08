@@ -581,11 +581,11 @@ export default function App() {
 
               {/* --- PAGE 12: CREATIVE CONTENT DESIGN — VIDEO GALLERY --- */}
               {currentSlide === 11 && (
-                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-start space-y-3">
-                  <div className="space-y-1">
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl flex flex-col justify-start space-y-3">
+                  <div className="space-y-1 shrink-0">
                     <h2 className="text-2xl font-bold font-display text-[#16C79A]">Video Gallery: <span className="text-white">TikTok, Reels & OVC Storyboards</span></h2>
                   </div>
-                  <div className="flex-1 flex flex-col justify-between">
+                  <div className="flex-1 overflow-y-auto pr-1 pb-4">
                     <VideoGallery />
                   </div>
                 </div>
