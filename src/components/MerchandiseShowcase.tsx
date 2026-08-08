@@ -11,10 +11,10 @@ export default function MerchandiseShowcase() {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   const items: MerchItem[] = [
-    { id: 1, imageSrc: "/photos/4.png" },
-    { id: 2, imageSrc: "/photos/2.png" },
-    { id: 3, imageSrc: "/photos/5.png" },
-    { id: 4, imageSrc: "/photos/3.png" }
+    { id: 1, imageSrc: "/merchandise/1.jpeg" },
+    { id: 2, imageSrc: "/merchandise/2.jpeg" },
+    { id: 3, imageSrc: "/merchandise/3.jpeg" },
+    { id: 4, imageSrc: "/merchandise/4.jpeg" }
   ];
 
   return (
