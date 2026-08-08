@@ -210,7 +210,7 @@ export default function CampaignBrandingShowcase() {
               <span className="px-2.5 py-1 rounded-md bg-[#000000] border border-[#1E3E62] font-bold">#DesherChabiAponarHate</span>
               <span className="px-2.5 py-1 rounded-md bg-[#000000] border border-[#1E3E62] font-bold">#DecentralizeBD</span>
               <span className="px-2.5 py-1 rounded-md bg-[#000000] border border-[#1E3E62] font-bold">#SmartDistricts</span>
-              <span className="px-2.5 py-1 rounded-md bg-[#000000] border border-[#1E3E62] font-bold">#TeamV_SUMCT</span>
+              <span className="px-2.5 py-1 rounded-md bg-[#000000] border border-[#1E3E62] font-bold">#TeamV_SMUCT</span>
             </div>
           </div>
         </div>

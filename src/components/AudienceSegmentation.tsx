@@ -7,7 +7,7 @@ export default function AudienceSegmentation() {
       level: "Geographic",
       title: "64 District Citizens & Campuses",
       points: [
-        "Students at SUMCT, BUET, DU, RU, SUST.",
+        "Students at SMUCT, BUET, DU, RU, SUST.",
         "Regional graduates facing migration pressure."
       ],
       icon: <GraduationCap className="w-5 h-5 text-[#16C79A]" />

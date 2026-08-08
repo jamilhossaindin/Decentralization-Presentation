@@ -23,7 +23,7 @@ export default function CampaignTimeline() {
       phase: "PHASE C",
       duration: "Weeks 7–8",
       title: "Post-Campaign & Policy Deliverable",
-      desc: "Compile 50,000 digital petition signatures, publish policy whitepaper, and present findings to SUMCT faculty.",
+      desc: "Compile 50,000 digital petition signatures, publish policy whitepaper, and present findings to SMUCT faculty.",
       status: "UPCOMING",
       color: "border-emerald-600 bg-emerald-50 text-emerald-700"
     }

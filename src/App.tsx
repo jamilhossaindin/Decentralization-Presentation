@@ -189,7 +189,7 @@ export default function App() {
           <div className="w-2.5 h-2.5 bg-[#16C79A] rounded-full shadow-[0_0_8px_#16C79A] animate-pulse"></div>
           <div>
             <span className="text-sm font-bold tracking-[0.2em] uppercase font-mono text-[#16C79A]">
-              SUMCT GRD-3216 // DECENTRALIZATION STUDY
+              SMUCT GRD-3216 // DECENTRALIZATION
             </span>
           </div>
         </div>
