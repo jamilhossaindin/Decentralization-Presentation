@@ -50,7 +50,7 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
   ];
 
   return (
-    <div className="w-full h-[80vh] min-h-[580px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
+    <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
       {/* Background Halftone Grid Dots (Top Right) */}
       <div className="absolute top-5 right-8 grid grid-cols-7 gap-2 opacity-20 pointer-events-none z-0">
         {Array.from({ length: 49 }).map((_, i) => (
@@ -79,28 +79,28 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
       </div>
 
       {/* MAIN BODY: DEDICATED TEAM-V LOGO & BRANDING STAGE */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 items-center relative z-10 my-2.5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center relative z-10 my-1">
         {/* Left Column: Team-V Typography Title & Info */}
-        <div className="lg:col-span-7 space-y-2.5">
+        <div className="lg:col-span-7 space-y-2">
           <div className="space-y-0">
-            <h1 className="text-[60px] font-black font-display tracking-tighter leading-none text-[#16C79A] uppercase relative">
+            <h1 className="text-[52px] sm:text-[58px] font-black font-display tracking-tighter leading-none text-[#16C79A] uppercase relative">
               <span className="block drop-shadow-md text-[#16C79A]">TEAM-V</span>
             </h1>
-            <div className="w-full h-0.5 bg-[#1E3E62] mt-1.5" />
+            <div className="w-full h-0.5 bg-[#1E3E62] mt-1" />
           </div>
 
-          <div className="space-y-2 pt-1">
-            <h3 className="text-base sm:text-lg font-bold text-[#16C79A] font-display uppercase tracking-tight">
+          <div className="space-y-1.5 pt-0.5">
+            <h3 className="text-sm sm:text-base font-bold text-[#16C79A] font-display uppercase tracking-tight">
               CREATIVE DIGITAL STRATEGISTS & SYSTEM DESIGNERS
             </h3>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-mono text-white pt-1">
-              <div className="p-2.5 rounded-xl bg-[#0B192C] border border-[#1E3E62] shadow-xs">
-                <span className="text-sm text-gray-400 font-bold uppercase block">Course Module</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono text-white pt-0.5">
+              <div className="p-2 rounded-xl bg-[#0B192C] border border-[#1E3E62] shadow-xs">
+                <span className="text-xs text-gray-400 font-bold uppercase block">Course Module</span>
                 <span className="font-bold text-white block">GRD-3216: Digital Content Design</span>
               </div>
-              <div className="p-2.5 rounded-xl bg-[#0B192C] border border-[#1E3E62] shadow-xs">
-                <span className="text-sm text-gray-400 font-bold uppercase block">Submission Details</span>
+              <div className="p-2 rounded-xl bg-[#0B192C] border border-[#1E3E62] shadow-xs">
+                <span className="text-xs text-gray-400 font-bold uppercase block">Submission Details</span>
                 <span className="font-bold text-[#16C79A] block">Sat, 08 Aug 2026 @ 10:00 AM</span>
               </div>
             </div>
@@ -109,12 +109,12 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
 
         {/* Right Column: High-Res Official Team-V Logo Display */}
         <div className="lg:col-span-5 flex justify-center relative">
-          <div className="relative w-full h-56 sm:h-64 rounded-2xl bg-[#0B192C] border-2 border-[#1E3E62] p-4 shadow-xl flex items-center justify-center overflow-hidden group">
+          <div className="relative w-full h-44 sm:h-48 rounded-2xl bg-[#0B192C] border-2 border-[#1E3E62] p-3 shadow-xl flex items-center justify-center overflow-hidden group">
             {/* Corner Tech Badges */}
-            <div className="absolute top-2.5 left-2.5 text-sm font-mono bg-[#000000] text-[#16C79A] border border-[#1E3E62] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
+            <div className="absolute top-2 left-2 text-xs font-mono bg-[#000000] text-[#16C79A] border border-[#1E3E62] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
               OFFICIAL TEAM LOGO
             </div>
-            <div className="absolute top-2.5 right-2.5 text-sm font-mono text-[#16C79A] font-bold">
+            <div className="absolute top-2 right-2 text-xs font-mono text-[#16C79A] font-bold">
               GROUP 05
             </div>
 
@@ -122,55 +122,55 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
             <img
               src="/team_v_logo.png"
               alt="Team-V Official Logo"
-              className="max-h-48 sm:max-h-52 w-auto object-contain relative z-10 drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+              className="max-h-36 sm:max-h-40 w-auto object-contain relative z-10 drop-shadow-md group-hover:scale-105 transition-transform duration-300"
             />
 
             {/* Bottom Tagline Overlay */}
-            <div className="absolute bottom-2.5 inset-x-2.5 text-center text-sm font-mono bg-[#000000]/90 text-white border border-[#1E3E62] px-2 py-1 rounded font-bold uppercase tracking-widest z-10">
+            <div className="absolute bottom-2 inset-x-2 text-center text-xs font-mono bg-[#000000]/90 text-white border border-[#1E3E62] px-2 py-0.5 rounded font-bold uppercase tracking-widest z-10">
               TEAM-V • SHANTO-MARIAM UNIVERSITY
             </div>
           </div>
         </div>
       </div>
 
-      {/* 5 TEAM MEMBERS ROW */}
-      <div className="pt-2.5 border-t border-[#1E3E62] space-y-2.5 z-10 relative">
-        <div className="flex items-center gap-2.5 text-sm font-mono">
+      {/* 5 TEAM MEMBERS ROW IN 4:3 RATIO */}
+      <div className="pt-2 border-t border-[#1E3E62] space-y-2 z-10 relative">
+        <div className="flex items-center gap-2 text-xs font-mono">
           <span className="font-bold text-[#16C79A] uppercase tracking-wider border-b-2 border-[#16C79A] pb-0.5">
-            THE 5 CREATIVE TEAM MEMBERS
+            THE 5 CREATIVE TEAM MEMBERS (4:3 RATIO)
           </span>
           <div className="flex-1 h-px bg-[#1E3E62]" />
         </div>
 
-        {/* 5 TEAM MEMBERS GRID */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+        {/* 5 TEAM MEMBERS GRID (4:3 Aspect Ratio) */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           {team.map((mem, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 6, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: idx * 0.04, duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
-              className="space-y-1 group cursor-pointer"
+              className="space-y-1.5 group cursor-pointer"
             >
-              {/* Member Photo Frame */}
-              <div className="w-full h-20 sm:h-24 bg-[#0B192C] rounded-lg overflow-hidden border border-[#1E3E62] shadow-sm group-hover:border-[#16C79A] transition-colors relative">
+              {/* Member Photo Frame in 4:3 Aspect Ratio */}
+              <div className="aspect-[4/3] w-full bg-[#0B192C] rounded-xl overflow-hidden border border-[#1E3E62] shadow-md group-hover:border-[#16C79A] transition-all relative">
                 <img
                   src={mem.img}
                   alt={`${mem.firstName} ${mem.lastName}`}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                  className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
                 />
-                <div className="absolute top-1 left-1 bg-[#000000] text-[#16C79A] border border-[#1E3E62] text-sm font-mono px-1 py-0.5 rounded font-bold">
+                <div className="absolute top-1.5 left-1.5 bg-[#000000]/85 text-[#16C79A] border border-white/20 text-xs font-mono px-1.5 py-0.5 rounded font-bold backdrop-blur-xs">
                   {mem.num}
                 </div>
               </div>
 
               {/* Member Details */}
               <div className="space-y-0.5">
-                <div className="text-sm font-bold font-mono text-[#16C79A] leading-tight truncate">
+                <div className="text-xs font-bold font-mono text-[#16C79A] leading-tight truncate">
                   {mem.firstName} {mem.lastName}
                 </div>
-                <p className="text-sm font-mono text-gray-300 font-semibold">{mem.id}</p>
-                <p className="text-sm font-mono text-gray-400 truncate leading-none">{mem.role}</p>
+                <p className="text-[11px] font-mono text-gray-300 font-semibold">{mem.id}</p>
+                <p className="text-[10px] font-mono text-gray-400 truncate leading-none">{mem.role}</p>
               </div>
             </motion.div>
           ))}
@@ -178,15 +178,15 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
       </div>
 
       {/* FOOTER METADATA BAR */}
-      <div className="pt-2 border-t border-[#1E3E62] flex flex-col sm:flex-row items-start sm:items-center justify-between text-sm font-mono text-white gap-2 z-10 relative">
+      <div className="pt-2 border-t border-[#1E3E62] flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs font-mono text-white gap-1 z-10 relative">
         {/* Department Info */}
-        <div className="flex items-center gap-2.5">
-          <div className="w-5.5 h-5.5 bg-[#16C79A] rounded flex items-center justify-center text-black font-bold text-sm">
+        <div className="flex items-center gap-2">
+          <div className="w-5 h-5 bg-[#16C79A] rounded flex items-center justify-center text-black font-bold text-xs">
             V
           </div>
           <div className="leading-tight">
-            <p className="font-bold text-[#16C79A] uppercase text-sm">SHANTO-MARIAM UNIVERSITY OF CREATIVE TECHNOLOGY</p>
-            <p className="text-gray-300 font-semibold text-sm">DEPARTMENT OF GRAPHIC DESIGN & MULTIMEDIA • 2026</p>
+            <p className="font-bold text-[#16C79A] uppercase text-xs">SHANTO-MARIAM UNIVERSITY OF CREATIVE TECHNOLOGY</p>
+            <p className="text-gray-300 font-semibold text-[10px]">DEPARTMENT OF GRAPHIC DESIGN & MULTIMEDIA • 2026</p>
           </div>
         </div>
       </div>
