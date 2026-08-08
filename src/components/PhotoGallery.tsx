@@ -78,15 +78,15 @@ export default function PhotoGallery() {
     : photos.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="space-y-4 my-2 font-sans">
+    <div className="space-y-4 my-2 font-sans text-white">
       {/* Category Filter Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-black/10 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#1E3E62] pb-3">
         <div className="flex items-center gap-1.5">
-          <Filter className="w-4 h-4 text-[#1746A2]" />
-          <span className="text-xs font-mono uppercase font-bold text-gray-700">CREATIVE ASSET FILTER:</span>
+          <Filter className="w-4 h-4 text-[#16C79A]" />
+          <span className="text-sm font-mono uppercase font-bold text-[#16C79A]">CREATIVE ASSET FILTER:</span>
         </div>
 
-        <div className="flex flex-wrap gap-1.5 font-mono text-xs">
+        <div className="flex flex-wrap gap-1.5 font-mono text-sm">
           {[
             { id: "all", label: "ALL ASSETS (6)" },
             { id: "carousel", label: "CAROUSELS" },
@@ -99,8 +99,8 @@ export default function PhotoGallery() {
               onClick={() => setActiveCategory(cat.id)}
               className={`px-3 py-1 rounded-lg border transition-all cursor-pointer ${
                 activeCategory === cat.id
-                  ? "bg-[#1746A2] text-white border-[#1746A2] font-bold shadow-sm"
-                  : "bg-white/60 text-gray-700 border-black/10 hover:bg-white"
+                  ? "bg-[#1E3E62] text-[#16C79A] border-[#16C79A] font-bold shadow-md"
+                  : "bg-[#000000] text-white border-[#1E3E62] hover:bg-[#1E3E62]/40"
               }`}
             >
               {cat.label}
@@ -118,30 +118,30 @@ export default function PhotoGallery() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: idx * 0.04, duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
             onClick={() => setSelectedPhoto(photo)}
-            className="group relative rounded-2xl bg-white border border-black/10 p-4 space-y-3 shadow-sm hover:shadow-md hover:border-[#1746A2]/40 transition-all cursor-pointer overflow-hidden"
+            className="group relative rounded-2xl bg-[#0B192C] border border-[#1E3E62] p-4 space-y-3 shadow-xl hover:border-[#16C79A] transition-all cursor-pointer overflow-hidden"
           >
             {/* Visual Canvas Mockup Block */}
             <div className={`h-40 rounded-xl bg-gradient-to-br ${photo.color} p-4 flex flex-col justify-between text-white relative overflow-hidden group-hover:scale-[1.02] transition-transform`}>
               <div className="flex justify-between items-center z-10">
-                <span className="text-[9px] font-mono uppercase bg-black/40 px-2 py-0.5 rounded font-bold border border-white/20">
+                <span className="text-sm font-mono uppercase bg-black/60 px-2 py-0.5 rounded font-bold border border-white/20">
                   {photo.category.toUpperCase()}
                 </span>
                 <Maximize2 className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
               </div>
 
               <div className="z-10 space-y-1">
-                <p className="text-[10px] font-mono text-emerald-300 font-bold">🔑 DESHER CHABI APONAR HATE</p>
-                <h4 className="text-sm font-bold font-serif leading-snug">{photo.title}</h4>
+                <p className="text-sm font-mono text-[#16C79A] font-bold">🔑 DESHER CHABI APONAR HATE</p>
+                <h4 className="text-base font-bold font-serif text-[#16C79A] leading-snug">{photo.title}</h4>
               </div>
             </div>
 
             {/* Info details */}
             <div className="space-y-1">
-              <div className="flex justify-between items-center text-[10px] font-mono text-gray-500">
+              <div className="flex justify-between items-center text-sm font-mono text-gray-400">
                 <span>SPECS: {photo.aspect}</span>
-                <span className="text-[#1746A2] font-bold">READY</span>
+                <span className="text-[#16C79A] font-bold">READY</span>
               </div>
-              <p className="text-xs text-gray-700 leading-relaxed font-sans">{photo.caption}</p>
+              <p className="text-sm text-white leading-relaxed font-sans">{photo.caption}</p>
             </div>
           </motion.div>
         ))}
@@ -149,33 +149,33 @@ export default function PhotoGallery() {
 
       {/* Modal Preview Popup */}
       {selectedPhoto && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#EBE7DF] border border-black/20 max-w-xl w-full rounded-2xl p-6 space-y-4 shadow-2xl relative">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-[#0B192C] border border-[#1E3E62] max-w-xl w-full rounded-2xl p-6 space-y-4 shadow-2xl relative text-white">
             <button
               onClick={() => setSelectedPhoto(null)}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/10 text-black font-bold flex items-center justify-center hover:bg-black/20 cursor-pointer"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#000000] text-white border border-[#1E3E62] font-bold flex items-center justify-center hover:bg-[#16C79A] hover:text-black cursor-pointer"
             >
               ✕
             </button>
 
-            <span className="text-xs font-mono uppercase text-[#1746A2] font-bold tracking-widest block">
+            <span className="text-sm font-mono uppercase text-[#16C79A] font-bold tracking-widest block">
               CREATIVE ASSET PREVIEW #{selectedPhoto.id}
             </span>
 
             <div className={`h-56 rounded-xl bg-gradient-to-br ${selectedPhoto.color} p-6 flex flex-col justify-between text-white`}>
-              <span className="text-xs font-mono uppercase bg-black/40 px-2.5 py-1 rounded font-bold w-fit border border-white/20">
+              <span className="text-sm font-mono uppercase bg-black/60 px-2.5 py-1 rounded font-bold w-fit border border-white/20">
                 {selectedPhoto.category.toUpperCase()}
               </span>
               <div>
-                <p className="text-xs font-mono text-amber-300 font-bold mb-1">🔑 CAMPAIGN CREATIVE DELIVERABLE</p>
-                <h3 className="text-xl font-bold font-serif">{selectedPhoto.title}</h3>
+                <p className="text-sm font-mono text-amber-300 font-bold mb-1">🔑 CAMPAIGN CREATIVE DELIVERABLE</p>
+                <h3 className="text-xl font-bold font-serif text-[#16C79A]">{selectedPhoto.title}</h3>
               </div>
             </div>
 
-            <div className="space-y-2 text-xs font-sans text-gray-800">
+            <div className="space-y-2 text-sm font-sans text-white">
               <p><strong>Description:</strong> {selectedPhoto.caption}</p>
               <p><strong>Resolution:</strong> {selectedPhoto.aspect}</p>
-              <p className="text-[#1746A2] font-mono font-bold">{selectedPhoto.hashtags}</p>
+              <p className="text-[#16C79A] font-mono font-bold">{selectedPhoto.hashtags}</p>
             </div>
           </div>
         </div>

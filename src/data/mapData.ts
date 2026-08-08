@@ -92,7 +92,7 @@ export const regions: RegionData[] = [
   },
   {
     id: "dhaka",
-    name: "Dhaka region",
+    name: "Dhaka",
     capital: "Dhaka (Over-centralized)",
     path: "M 265 220 L 320 250 L 330 310 L 260 360 L 200 340 L 210 260 Z",
     x: 260,

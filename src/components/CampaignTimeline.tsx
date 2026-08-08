@@ -30,30 +30,30 @@ export default function CampaignTimeline() {
   ];
 
   return (
-    <div className="space-y-4 my-2 font-sans">
-      <div className="flex items-center justify-between border-b border-black/10 pb-2">
-        <span className="text-xs font-mono uppercase font-bold text-gray-800 tracking-wider">
+    <div className="space-y-4 my-2 font-sans text-white">
+      <div className="flex items-center justify-between border-b border-[#1E3E62] pb-2">
+        <span className="text-sm font-mono uppercase font-bold text-[#16C79A] tracking-wider">
           3-PHASE CAMPAIGN EXECUTION ROADMAP
         </span>
-        <span className="text-xs font-mono text-[#1746A2] font-bold">8 WEEKS TOTAL</span>
+        <span className="text-sm font-mono text-gray-300 font-bold">8 WEEKS TOTAL</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {phases.map((ph, idx) => (
-          <div key={idx} className="p-5 rounded-2xl bg-white border border-black/15 shadow-sm space-y-3 flex flex-col justify-between">
+          <div key={idx} className="p-5 rounded-2xl bg-[#0B192C] border border-[#1E3E62] shadow-xl space-y-3 flex flex-col justify-between">
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-xs font-mono font-bold text-gray-500">{ph.duration}</span>
-                <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded border ${ph.color}`}>
+                <span className="text-sm font-mono font-bold text-gray-400">{ph.duration}</span>
+                <span className="text-sm font-mono font-bold px-2 py-0.5 rounded bg-[#1E3E62] text-[#16C79A] border border-[#1E3E62]">
                   {ph.status}
                 </span>
               </div>
-              <h4 className="text-xs font-mono text-[#1746A2] font-bold uppercase">{ph.phase}</h4>
-              <h3 className="text-sm font-bold text-black font-serif">{ph.title}</h3>
-              <p className="text-xs text-gray-700 leading-relaxed">{ph.desc}</p>
+              <h4 className="text-sm font-mono text-[#16C79A] font-bold uppercase">{ph.phase}</h4>
+              <h3 className="text-lg font-bold text-white font-serif">{ph.title}</h3>
+              <p className="text-sm text-white leading-relaxed">{ph.desc}</p>
             </div>
 
-            <div className="pt-2 border-t border-black/10 text-[9px] font-mono text-gray-500 font-bold">
+            <div className="pt-2 border-t border-[#1E3E62] text-sm font-mono text-gray-400 font-bold">
               MILESTONE 0{idx + 1}
             </div>
           </div>

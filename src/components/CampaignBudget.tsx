@@ -11,46 +11,46 @@ export default function CampaignBudget() {
   ];
 
   return (
-    <div className="space-y-4 my-2 font-sans">
-      <div className="flex items-center justify-between border-b border-black/10 pb-2">
-        <span className="text-xs font-mono uppercase font-bold text-gray-800 tracking-wider">
+    <div className="space-y-4 my-2 font-sans text-white">
+      <div className="flex items-center justify-between border-b border-[#1E3E62] pb-2">
+        <span className="text-sm font-mono uppercase font-bold text-[#16C79A] tracking-wider">
           ESTIMATED CAMPAIGN MEDIA BUDGET BREAKDOWN
         </span>
-        <span className="text-xs font-mono text-emerald-700 font-bold">TOTAL: ৳ 7,00,000 BDT</span>
+        <span className="text-sm font-mono text-[#16C79A] font-bold">TOTAL: ৳ 7,00,000 BDT</span>
       </div>
 
-      <div className="p-5 rounded-2xl bg-white border border-black/15 shadow-sm space-y-4">
+      <div className="p-5 rounded-2xl bg-[#0B192C] border border-[#1E3E62] shadow-xl space-y-4 text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-3">
-            <h4 className="text-xs font-mono text-gray-500 uppercase font-bold">SPEND ALLOCATION MATRIX</h4>
+            <h4 className="text-sm font-mono text-[#16C79A] uppercase font-bold">SPEND ALLOCATION MATRIX</h4>
             <div className="space-y-2">
               {budgetItems.map((item, idx) => (
-                <div key={idx} className="p-2.5 rounded-xl bg-[#EBE7DF] border border-black/10 flex items-center justify-between text-xs">
+                <div key={idx} className="p-2.5 rounded-xl bg-[#1E3E62] border border-[#1E3E62] flex items-center justify-between text-sm text-white">
                   <div>
-                    <p className="font-bold text-black font-serif">{item.category}</p>
-                    <p className="text-[10px] text-gray-600">{item.note}</p>
+                    <p className="font-bold text-white text-base font-serif">{item.category}</p>
+                    <p className="text-sm text-white leading-relaxed">{item.note}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-mono font-bold text-[#1746A2]">{item.amount}</p>
-                    <span className="text-[9px] font-mono text-gray-500">{item.pct}% ALLOCATION</span>
+                    <p className="font-mono font-bold text-[#16C79A]">{item.amount}</p>
+                    <span className="text-sm font-mono text-gray-300">{item.pct}% ALLOCATION</span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="flex flex-col justify-between p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-3">
+          <div className="flex flex-col justify-between p-4 rounded-xl bg-[#1E3E62] border border-[#1E3E62] space-y-3 text-white">
             <div>
-              <span className="text-[10px] font-mono text-[#1746A2] uppercase font-bold">FINANCIAL ROI JUSTIFICATION</span>
-              <h3 className="text-base font-bold text-black font-serif mt-1">High Efficiency Social Impact</h3>
-              <p className="text-xs text-gray-700 leading-relaxed mt-2">
-                By leveraging <strong>micro-influencer partnerships</strong> and highly targeted <strong>15-second social media video spots</strong>, TEAM-V achieves a low Cost-Per-Reach of ~৳0.14 BDT per engaged student across 64 districts.
+              <span className="text-sm font-mono text-[#16C79A] uppercase font-bold">FINANCIAL ROI JUSTIFICATION</span>
+              <h3 className="text-lg font-bold text-white font-serif mt-1">High Efficiency Social Impact</h3>
+              <p className="text-sm text-white leading-relaxed mt-2">
+                By leveraging <strong className="text-[#16C79A]">micro-influencer partnerships</strong> and highly targeted <strong className="text-[#16C79A]">15-second social media video spots</strong>, TEAM-V achieves a low Cost-Per-Reach of ~৳0.14 BDT per engaged student across 64 districts.
               </p>
             </div>
 
-            <div className="pt-2 border-t border-blue-200 flex justify-between items-center text-xs font-mono">
-              <span className="text-gray-600">AUDITED BY: TEAM-V HR</span>
-              <span className="font-bold text-[#1746A2]">APPROVED</span>
+            <div className="pt-2 border-t border-[#1E3E62] flex justify-between items-center text-sm font-mono">
+              <span className="text-gray-400">AUDITED BY: TEAM-V HR</span>
+              <span className="font-bold text-[#16C79A]">APPROVED</span>
             </div>
           </div>
         </div>

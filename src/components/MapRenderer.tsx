@@ -9,7 +9,29 @@ interface MapRendererProps {
   showMigrationFlows?: boolean;
   simulationValue?: number; // 0 to 100 (0 = highly centralized, 100 = decentralized)
   showMultipleHubs?: boolean;
+  isDecentralized?: boolean;
+  showDecentralizationNetwork?: boolean;
+  hideLabels?: boolean;
 }
+
+// Polycentric mesh corridors for Decentralized Bangladesh (Slide 02)
+const decentralizedMesh = [
+  { from: "dhaka", to: "chattogram", arc: 20 },
+  { from: "dhaka", to: "sylhet", arc: -20 },
+  { from: "dhaka", to: "rajshahi", arc: 25 },
+  { from: "dhaka", to: "khulna", arc: -25 },
+  { from: "dhaka", to: "barishal", arc: 15 },
+  { from: "dhaka", to: "rangpur", arc: -25 },
+  { from: "dhaka", to: "mymensingh", arc: 15 },
+  // Inter-regional ring corridors
+  { from: "rangpur", to: "rajshahi", arc: 20 },
+  { from: "rajshahi", to: "khulna", arc: 20 },
+  { from: "khulna", to: "barishal", arc: -15 },
+  { from: "barishal", to: "chattogram", arc: 20 },
+  { from: "chattogram", to: "sylhet", arc: 25 },
+  { from: "sylhet", to: "mymensingh", arc: -20 },
+  { from: "mymensingh", to: "rangpur", arc: 20 }
+];
 
 export default function MapRenderer({
   activeLayer = "none",
@@ -18,8 +40,17 @@ export default function MapRenderer({
   showMigrationFlows = false,
   simulationValue = undefined,
   showMultipleHubs = false,
+  isDecentralized = false,
+  showDecentralizationNetwork = false,
+  hideLabels = false,
 }: MapRendererProps) {
   const [hoveredRegion, setHoveredRegion] = useState<RegionData | null>(null);
+
+  // Is this specific to Slide 02 (Presentation Topic Page)
+  const isTopicPage = isDecentralized || showDecentralizationNetwork;
+
+  // For simulation slide (Slide 16)
+  const isSimulationDecentralized = simulationValue !== undefined && simulationValue > 30;
 
   // Helper to calculate opportunities based on layer
   const getIntensityValue = (region: RegionData) => {
@@ -27,65 +58,41 @@ export default function MapRenderer({
     return region.metrics[activeLayer] || 0;
   };
 
-  // Helper to generate coordinates of arcs towards Dhaka (X: 260, Y: 285)
-  const getArcPath = (fromX: number, fromY: number, toX: number, toY: number) => {
-    // Calc midpoint
+  // Helper to generate coordinates of curved arcs
+  const getArcPath = (fromX: number, fromY: number, toX: number, toY: number, customOffset: number = 25) => {
     const midX = (fromX + toX) / 2;
     const midY = (fromY + toY) / 2;
-    // Add offset for curve bending westward or eastward based on starting position
     const dx = toX - fromX;
     const dy = toY - fromY;
     const angle = Math.atan2(dy, dx);
-    const offset = 25; // curvature strength
-    const cx = midX + Math.sin(angle) * offset;
-    const cy = midY - Math.cos(angle) * offset;
+    const cx = midX + Math.sin(angle) * customOffset;
+    const cy = midY - Math.cos(angle) * customOffset;
     return `M ${fromX} ${fromY} Q ${cx} ${cy} ${toX} ${toY}`;
   };
 
   return (
-    <div className="relative w-full h-[360px] md:h-[580px] flex items-center justify-center p-2 rounded-2xl bg-white border border-black/15 shadow-sm overflow-hidden group">
-      {/* Grid Pattern Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(0,0,0,0.06)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-
-      {/* Technical Compass Indicator */}
-      <div className="absolute top-4 left-4 font-mono text-[10px] text-gray-500 tracking-widest hidden md:block font-bold">
-        GRID REF: 23.811° N / 90.412° E
-      </div>
-
-      <div className="absolute top-4 right-4 flex items-center gap-1.5 font-mono text-[10px] text-[#1746A2] font-bold">
-        <span className="w-1.5 h-1.5 bg-[#1746A2] rounded-full animate-ping" />
-        SPATIAL MAPPING ENGINE
-      </div>
-
-      {/* SVG Container */}
+    <div className="relative w-full h-full flex items-center justify-center">
+      {/* SVG Container: Large tight viewbox matching Presentation Topic page */}
       <svg
-        viewBox="0 0 500 600"
-        className="w-full h-full max-h-[540px] select-none"
+        viewBox="70 40 370 520"
+        className="w-full h-full max-h-[640px] drop-shadow-2xl"
         id="bangladesh-svg-map"
       >
         <defs>
-          {/* Radial mask for neon glow */}
           <radialGradient id="dhakaGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#ef4444" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#ef4444" stopOpacity="0" />
+            <stop offset="0%" stopColor={isSimulationDecentralized || isTopicPage ? "#16C79A" : "#ef4444"} stopOpacity="0.5" />
+            <stop offset="100%" stopColor={isSimulationDecentralized || isTopicPage ? "#16C79A" : "#ef4444"} stopOpacity="0" />
           </radialGradient>
 
           <radialGradient id="greenHubGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#006A4E" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#006A4E" stopOpacity="0" />
+            <stop offset="0%" stopColor="#16C79A" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#16C79A" stopOpacity="0" />
           </radialGradient>
 
-          <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#006A4E" stopOpacity="0.2" />
-            <stop offset="60%" stopColor="#f59e0b" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#ef4444" stopOpacity="0.8" />
+          <linearGradient id="flowGradCentral" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#16C79A" stopOpacity="0.15" />
+            <stop offset="100%" stopColor="#16C79A" stopOpacity="0.75" />
           </linearGradient>
-
-          {/* Glow filter */}
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="6" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
         </defs>
 
         {/* --- SECTION 1: MAP REGIONS (DIVISION PATHS) --- */}
@@ -95,29 +102,35 @@ export default function MapRenderer({
             const isHovered = hoveredRegion?.id === region.id;
             const intensity = getIntensityValue(region);
 
-            // Dynamically style based on active parameters
-            let fill = "#EBE7DF";
-            let stroke = "rgba(0, 0, 0, 0.25)";
+            let fill = "#0B192C";
+            let stroke = "#1E3E62";
             let strokeWidth = 1.2;
 
-            if (isSelected) {
-              fill = region.id === "dhaka" ? "rgba(220, 38, 38, 0.15)" : "rgba(23, 70, 162, 0.15)";
-              stroke = region.id === "dhaka" ? "#DC2626" : "#1746A2";
+            if (showMigrationFlows && region.id === "dhaka") {
+              // Highlight Dhaka area with prominent red tint for Social Context slide
+              fill = "rgba(220, 38, 38, 0.32)";
+              stroke = "#DC2626";
+              strokeWidth = 2.2;
+            } else if (isTopicPage) {
+              fill = "rgba(22, 199, 154, 0.12)";
+              stroke = "#16C79A";
+              strokeWidth = 1.6;
+            } else if (isSelected) {
+              fill = region.id === "dhaka" && !isSimulationDecentralized ? "rgba(220, 38, 38, 0.25)" : "rgba(22, 199, 154, 0.28)";
+              stroke = region.id === "dhaka" && !isSimulationDecentralized ? "#DC2626" : "#16C79A";
               strokeWidth = 2.5;
             } else if (isHovered) {
-              fill = "rgba(23, 70, 162, 0.08)";
-              stroke = "#1746A2";
-              strokeWidth = 1.8;
+              fill = "rgba(22, 199, 154, 0.22)";
+              stroke = "#16C79A";
+              strokeWidth = 2;
             } else if (activeLayer !== "none") {
-              // Heatmap style coloring
-              // Dhaka will have high metrics, other districts will have low metrics
               const ratio = intensity / 100;
               if (region.id === "dhaka") {
-                fill = `rgba(239, 68, 68, ${0.1 + ratio * 0.45})`;
-                stroke = `rgba(239, 68, 68, ${0.3 + ratio * 0.7})`;
+                fill = `rgba(239, 68, 68, ${0.15 + ratio * 0.45})`;
+                stroke = `rgba(239, 68, 68, ${0.4 + ratio * 0.6})`;
               } else {
-                fill = `rgba(0, 106, 78, ${0.05 + ratio * 0.35})`;
-                stroke = `rgba(52, 211, 153, ${0.15 + ratio * 0.4})`;
+                fill = `rgba(22, 199, 154, ${0.08 + ratio * 0.35})`;
+                stroke = `rgba(22, 199, 154, ${0.2 + ratio * 0.5})`;
               }
             }
 
@@ -138,8 +151,92 @@ export default function MapRenderer({
           })}
         </g>
 
-        {/* --- SECTION 2: OPPORTUNITY HEAT BUBBLES --- */}
-        {activeLayer !== "none" && (
+        {/* --- SECTION 2: TOPIC PAGE DECENTRALIZED MESH ANIMATION (SLIDE 02 ONLY) --- */}
+        {isTopicPage && (
+          <g id="decentralized-network-mesh" className="pointer-events-none">
+            {decentralizedMesh.map((mesh, idx) => {
+              const fromRegion = regions.find((r) => r.id === mesh.from);
+              const toRegion = regions.find((r) => r.id === mesh.to);
+              if (!fromRegion || !toRegion) return null;
+
+              const pathStr = getArcPath(fromRegion.x, fromRegion.y, toRegion.x, toRegion.y, mesh.arc);
+
+              return (
+                <g key={`mesh-${mesh.from}-${mesh.to}-${idx}`}>
+                  <path
+                    d={pathStr}
+                    fill="none"
+                    stroke="#16C79A"
+                    strokeWidth={1.8}
+                    strokeDasharray={idx % 3 === 0 ? "none" : "6 4"}
+                    opacity={0.7}
+                  />
+                  <circle r={3.5} fill="#16C79A">
+                    <animateMotion
+                      path={pathStr}
+                      dur={`${2.2 + (idx % 4) * 0.8}s`}
+                      repeatCount="indefinite"
+                      begin={`${idx * 0.25}s`}
+                    />
+                  </circle>
+                  <circle r={2} fill="#06b6d4">
+                    <animateMotion
+                      path={pathStr}
+                      dur={`${2.8 + (idx % 3) * 0.9}s`}
+                      repeatCount="indefinite"
+                      begin={`${0.6 + idx * 0.3}s`}
+                    />
+                  </circle>
+                </g>
+              );
+            })}
+
+            {regions.map((region, i) => (
+              <g key={`decentral-hub-rings-${region.id}`}>
+                <circle
+                  cx={region.x}
+                  cy={region.y}
+                  r={22}
+                  fill="url(#greenHubGlow)"
+                >
+                  <animate
+                    attributeName="opacity"
+                    values="0.4;0.8;0.4"
+                    dur={`${2.5 + (i % 3) * 0.5}s`}
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle
+                  cx={region.x}
+                  cy={region.y}
+                  r={14}
+                  fill="none"
+                  stroke="#16C79A"
+                  strokeWidth={1.2}
+                  opacity={0.8}
+                >
+                  <animate
+                    attributeName="r"
+                    values="8;24;8"
+                    dur={`${2.5 + (i % 3) * 0.5}s`}
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="0.9;0.1;0.9"
+                    dur={`${2.5 + (i % 3) * 0.5}s`}
+                    repeatCount="indefinite"
+                  />
+                </circle>
+                <circle cx={region.x} cy={region.y} r={5} fill="#16C79A" />
+                <circle cx={region.x} cy={region.y} r={2} fill="#FFFFFF" />
+              </g>
+            ))}
+          </g>
+        )}
+
+        {/* --- SECTION 3: OPPORTUNITY HEAT BUBBLES (SLIDE 07 SPATIAL AUDIT ONLY) --- */}
+        {activeLayer !== "none" && !isTopicPage && !showMigrationFlows && (
           <g id="heatmap-layer-group" className="pointer-events-none">
             {regions.map((region) => {
               const intensity = getIntensityValue(region);
@@ -149,27 +246,24 @@ export default function MapRenderer({
 
               return (
                 <g key={`headbubble-${region.id}`}>
-                  {/* Outer pulsating aura */}
                   <circle
                     cx={region.x}
                     cy={region.y}
                     r={radius * 1.5}
-                    fill={isDhaka ? "rgba(239, 68, 68, 0.1)" : "rgba(0, 106, 78, 0.08)"}
+                    fill={isDhaka ? "rgba(239, 68, 68, 0.15)" : "rgba(22, 199, 154, 0.12)"}
                     className="animate-pulse-slow"
                   />
-                  {/* Core glow bubble */}
                   <circle
                     cx={region.x}
                     cy={region.y}
                     r={radius}
                     fill={isDhaka ? "url(#dhakaGlow)" : "url(#greenHubGlow)"}
                   />
-                  {/* Small sharp pinpoint */}
                   <circle
                     cx={region.x}
                     cy={region.y}
                     r={4}
-                    fill={isDhaka ? "#ef4444" : "#00a273"}
+                    fill={isDhaka ? "#ef4444" : "#16C79A"}
                     className="shadow-md"
                   />
                 </g>
@@ -178,8 +272,8 @@ export default function MapRenderer({
           </g>
         )}
 
-        {/* --- SECTION 3: MIGRATION FLOWS (GLOWING BEZIER LINES & PARTICLES) --- */}
-        {showMigrationFlows && (
+        {/* --- SECTION 4: MIGRATION FLOWS (SLIDE 03 SOCIAL CONTEXT ANIMATION) --- */}
+        {showMigrationFlows && !isTopicPage && (
           <g id="migration-flows-group" className="pointer-events-none">
             {connectionFlows.map((flow, idx) => {
               const fromRegion = regions.find((r) => r.id === flow.from);
@@ -190,325 +284,131 @@ export default function MapRenderer({
 
               return (
                 <g key={`flow-${flow.from}-${flow.to}`}>
-                  {/* Background connection curve */}
                   <path
                     d={pathString}
                     fill="none"
-                    stroke="url(#flowGrad)"
-                    strokeWidth={1.2}
+                    stroke="url(#flowGradCentral)"
+                    strokeWidth={1.4}
                     strokeDasharray={idx % 2 === 0 ? "none" : "4 4"}
-                    opacity={0.4}
+                    opacity={0.65}
                   />
-                  {/* Superimposed highlight */}
-                  <path
-                    d={pathString}
-                    fill="none"
-                    stroke="#00a273"
-                    strokeWidth={0.5}
-                    opacity={0.25}
-                  />
-                  {/* Flowing particle circle along path */}
-                  <circle r={3} fill="#ef4444" filter="url(#glow)">
+                  <circle r={2.8} fill="#16C79A">
                     <animateMotion
                       path={pathString}
-                      dur={`${3 + (idx % 3) * 1.5}s`}
+                      dur={`${2.8 + (idx % 3) * 1.2}s`}
                       repeatCount="indefinite"
-                      begin={`${idx * 0.3}s`}
-                    />
-                  </circle>
-                  <circle r={1.5} fill="#ffffff">
-                    <animateMotion
-                      path={pathString}
-                      dur={`${3 + (idx % 3) * 1.5}s`}
-                      repeatCount="indefinite"
-                      begin={`${idx * 0.3}s`}
+                      begin={`${idx * 0.28}s`}
                     />
                   </circle>
                 </g>
               );
             })}
 
-            {/* Hyper-glowing target crown at Dhaka */}
-            <circle
-              cx={260}
-              cy={285}
-              r={8}
-              fill="#ef4444"
-              filter="url(#glow)"
-            />
-            <circle cx={260} cy={285} r={2.5} fill="#ffffff" />
+            {/* Concentric Pulsing Radio Waves radiating from Dhaka */}
+            {[0, 0.7, 1.4, 2.1].map((delay, waveIdx) => (
+              <circle
+                key={`dhaka-radio-wave-${waveIdx}`}
+                cx={260}
+                cy={285}
+                r={6}
+                fill="none"
+                stroke="#ef4444"
+                strokeWidth={1.8}
+              >
+                <animate
+                  attributeName="r"
+                  values="6;26;48"
+                  dur="2.8s"
+                  begin={`${delay}s`}
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0.95;0.5;0"
+                  dur="2.8s"
+                  begin={`${delay}s`}
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="stroke-width"
+                  values="2;1.2;0.4"
+                  dur="2.8s"
+                  begin={`${delay}s`}
+                  repeatCount="indefinite"
+                />
+              </circle>
+            ))}
+
+            {/* Glowing Red Central Node at Dhaka (Using strictly SVG-native animations anchored to cx,cy) */}
+            <circle cx={260} cy={285} r={22} fill="url(#dhakaGlow)">
+              <animate
+                attributeName="r"
+                values="16;26;16"
+                dur="2.5s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
+                values="0.6;0.9;0.6"
+                dur="2.5s"
+                repeatCount="indefinite"
+              />
+            </circle>
+            <circle cx={260} cy={285} r={5.5} fill="#DC2626" />
+            <circle cx={260} cy={285} r={2} fill="#FFFFFF" />
           </g>
         )}
 
-        {/* --- SECTION 4: FUTURE SIMULATOR MUTATING FLOWS --- */}
-        {simulationValue !== undefined && (
-          <g id="simulation-physics-group" className="pointer-events-none">
-            {/* 0 = Centralized, 100 = Decentralized */}
-            {/* Draw centralization lines or decentralized waves based on slider */}
+        {/* --- SECTION 5: MULTI-HUB VISION (SLIDE 16 SIMULATOR) --- */}
+        {showMultipleHubs && !isTopicPage && (
+          <g id="multihub-group" className="pointer-events-none">
             {regions.map((region) => {
-              const isDhaka = region.id === "dhaka";
-
-              // Dhaka shrink factor: starts at 80% strength down to 20%
-              // Other hubs increase: start at 5% to 50%
-              const dhakaWeight = 1 - (simulationValue / 100) * 0.75;
-              const remoteWeight = (simulationValue / 100);
-
-              if (isDhaka) {
-                const dhakaRadius = 20 + dhakaWeight * 90;
-                return (
-                  <g key="sim-dhaka">
-                    <circle
-                      cx={260}
-                      cy={285}
-                      r={dhakaRadius}
-                      fill="url(#dhakaGlow)"
-                      opacity={0.3 + dhakaWeight * 0.7}
-                    />
-                    <circle
-                      cx={260}
-                      cy={285}
-                      r={6 + dhakaWeight * 14}
-                      fill="#ef4444"
-                      filter="url(#glow)"
-                      opacity={0.5 + dhakaWeight * 0.5}
-                    />
-                    <circle cx={260} cy={285} r={2} fill="#ffffff" />
-                  </g>
-                );
-              } else {
-                // Determine regional size based on slider
-                const isTargetHub = ["sylhet", "chattogram", "khulna", "rajshahi", "rangpur", "barishal", "cumilla"].includes(region.id);
-                if (!isTargetHub) return null;
-
-                const hubRadius = 2 + remoteWeight * 40 * (region.metrics.jobs / 60);
-                const opacity = remoteWeight * 0.85;
-
-                return (
-                  <g key={`sim-${region.id}`}>
-                    {/* Glowing outer wave if decentralized option is higher */}
-                    {simulationValue > 30 && (
-                      <circle
-                        cx={region.x}
-                        cy={region.y}
-                        r={hubRadius * 1.6}
-                        fill="rgba(0, 106, 78, 0.12)"
-                        className="animate-pulse-slow"
-                        opacity={opacity}
-                      />
-                    )}
-                    <circle
-                      cx={region.x}
-                      cy={region.y}
-                      r={hubRadius}
-                      fill="url(#greenHubGlow)"
-                      opacity={opacity}
-                    />
-                    <circle
-                      cx={region.x}
-                      cy={region.y}
-                      r={2 + remoteWeight * 5}
-                      fill="#00a273"
-                      filter="url(#glow)"
-                      opacity={opacity}
-                    />
-                    {simulationValue > 50 && (
-                      <circle
-                        cx={region.x}
-                        cy={region.y}
-                        r={1}
-                        fill="#ffffff"
-                        opacity={opacity}
-                      />
-                    )}
-
-                    {/* Faint connective nodes of regional prosperity mapping */}
-                    {simulationValue > 40 && (
-                      <circle
-                        cx={region.x}
-                        cy={region.y}
-                        r={hubRadius * 2.2}
-                        fill="none"
-                        stroke="#00a273"
-                        strokeWidth={0.5}
-                        strokeDasharray="2 3"
-                        opacity={opacity * 0.4}
-                      />
-                    )}
-                  </g>
-                );
-              }
+              if (region.id === "dhaka") return null;
+              return (
+                <g key={`hub-${region.id}`}>
+                  <circle cx={region.x} cy={region.y} r={18} fill="url(#greenHubGlow)" />
+                  <circle cx={region.x} cy={region.y} r={6} fill="#16C79A" />
+                </g>
+              );
             })}
-
-            {/* Interactive flow paths that start fading out as slider goes toward decentralized */}
-            {simulationValue < 80 && (
-              <g opacity={1 - (simulationValue / 100)}>
-                {connectionFlows.map((flow, idx) => {
-                  const fromRegion = regions.find((r) => r.id === flow.from);
-                  if (!fromRegion) return null;
-                  const pathString = getArcPath(fromRegion.x, fromRegion.y, 260, 285);
-                  return (
-                    <circle key={`sim-flow-dot-${idx}`} r={2} fill="#ef4444" opacity={1 - (simulationValue / 100)}>
-                      <animateMotion
-                        path={pathString}
-                        dur={`${4 + (idx % 2) * 2}s`}
-                        repeatCount="indefinite"
-                        begin={`${idx * 0.4}s`}
-                      />
-                    </circle>
-                  );
-                })}
-              </g>
-            )}
           </g>
         )}
 
-        {/* --- SECTION 5: FINAL HUB VISION OVERLAY --- */}
-        {showMultipleHubs && (
-          <g id="final-vision-hubs" className="pointer-events-none">
+        {/* --- SECTION 6: DIVISION CITY LABELS (CLEAN TEXT WITHOUT BOXES) --- */}
+        {!isTopicPage && !hideLabels && (
+          <g id="labels-group" className="pointer-events-none">
             {regions.map((region) => {
-              // Instead of only Dhaka shining, all main 8 regional units are brilliant nodes
               const isDhaka = region.id === "dhaka";
-              const rGlow = isDhaka ? 35 : 25 + (region.metrics.jobs / 100) * 15;
 
               return (
-                <g key={`final-${region.id}`} className="animate-float" style={{ animationDelay: `${region.x * 3}ms` }}>
-                  {/* Soft environmental green aura */}
-                  <circle
-                    cx={region.x}
-                    cy={region.y}
-                    r={rGlow * 1.8}
-                    fill={isDhaka ? "rgba(0, 106, 78, 0.08)" : "rgba(0, 106, 78, 0.12)"}
-                    className="animate-pulse-slow"
-                  />
-                  {/* Concentric rings */}
-                  <circle
-                    cx={region.x}
-                    cy={region.y}
-                    r={rGlow}
-                    fill="url(#greenHubGlow)"
-                    opacity={0.8}
-                  />
-                  {/* Bright Core */}
-                  <circle
-                    cx={region.x}
-                    cy={region.y}
-                    r={5}
-                    fill="#00a273"
-                    filter="url(#glow)"
-                  />
-                  <circle cx={region.x} cy={region.y} r={1.5} fill="#ffffff" />
-
-                  {/* Connecting link webs of decentralized web */}
-                  {regions.map((otherRegion, oIdx) => {
-                    // Draw lines between neighbouring divisions to showcase a connected ecosystem
-                    const isNeighbor =
-                      (region.id === "rajshahi" && otherRegion.id === "rangpur") ||
-                      (region.id === "rajshahi" && otherRegion.id === "khulna") ||
-                      (region.id === "dhaka" && otherRegion.id === "mymensingh") ||
-                      (region.id === "dhaka" && otherRegion.id === "cumilla") ||
-                      (region.id === "cumilla" && otherRegion.id === "chattogram") ||
-                      (region.id === "cumilla" && otherRegion.id === "sylhet") ||
-                      (region.id === "dhaka" && otherRegion.id === "barishal");
-
-                    if (isNeighbor && otherRegion.id > region.id) {
-                      return (
-                        <line
-                          key={`link-${region.id}-${otherRegion.id}`}
-                          x1={region.x}
-                          y1={region.y}
-                          x2={otherRegion.x}
-                          y2={otherRegion.y}
-                          stroke="rgba(0, 162, 115, 0.45)"
-                          strokeWidth={1}
-                          strokeDasharray="3 3"
-                        />
-                      );
-                    }
-                    return null;
-                  })}
+                <g key={`lbl-${region.id}`}>
+                  {/* Subtle dark text stroke for readability against glowing lines */}
+                  <text
+                    x={region.x}
+                    y={region.y - 12}
+                    textAnchor="middle"
+                    stroke="#000000"
+                    strokeWidth={3.5}
+                    strokeLinejoin="round"
+                    className="text-xs font-bold font-mono tracking-wider"
+                  >
+                    {region.name}
+                  </text>
+                  {/* Foreground crisp label with identical emerald color across all cities */}
+                  <text
+                    x={region.x}
+                    y={region.y - 12}
+                    textAnchor="middle"
+                    className="text-xs font-extrabold font-mono tracking-wider fill-[#16C79A]"
+                  >
+                    {region.name}
+                  </text>
                 </g>
               );
             })}
           </g>
         )}
-
-        {/* --- SECTION 6: HIGH-CONTRAST DIVISION LABELS --- */}
-        <g id="labels-group" className="pointer-events-none">
-          {regions.map((region) => {
-            const isHovered = hoveredRegion?.id === region.id;
-            const isSelected = selectedRegionId === region.id;
-            const isDhaka = region.id === "dhaka";
-
-            const pillBg = isSelected
-              ? isDhaka ? "#DC2626" : "#1746A2"
-              : isHovered
-              ? "#1746A2"
-              : "#111111";
-
-            const pillWidth = isHovered || isSelected ? 80 : 72;
-            const pillHeight = isHovered || isSelected ? 18 : 16;
-            const fontSize = isHovered || isSelected ? "text-[10px] font-extrabold" : "text-[9px] font-bold";
-
-            return (
-              <g key={`lbl-${region.id}`}>
-                {/* Micro background pill for maximum high-contrast text legibility */}
-                <rect
-                  x={region.x - pillWidth / 2}
-                  y={region.y - (isHovered || isSelected ? 20 : 18)}
-                  width={pillWidth}
-                  height={pillHeight}
-                  rx={4}
-                  fill={pillBg}
-                  stroke="#FFFFFF"
-                  strokeWidth={0.75}
-                  className="transition-all duration-200 shadow-md"
-                />
-                <text
-                  x={region.x}
-                  y={region.y - (isHovered || isSelected ? 8 : 7)}
-                  textAnchor="middle"
-                  className={`${fontSize} fill-white font-mono tracking-wider transition-all duration-200`}
-                >
-                  {region.name}
-                </text>
-              </g>
-            );
-          })}
-        </g>
       </svg>
-
-      {/* Embedded high-contrast visual tooltip card for desktop & mobile */}
-      <AnimatePresence>
-        {hoveredRegion && !selectedRegionId && (
-          <motion.div
-            initial={{ opacity: 0, y: 12, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.96 }}
-            transition={{ duration: 0.18 }}
-            className="absolute bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-72 p-4 rounded-xl bg-white border border-black/20 shadow-xl z-30 space-y-1.5"
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-black font-sans tracking-tight">
-                {hoveredRegion.name}
-              </span>
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#1746A2]/10 text-[#1746A2] border border-[#1746A2]/30 uppercase">
-                District Core
-              </span>
-            </div>
-            <p className="text-xs text-gray-800 font-sans font-medium leading-relaxed">
-              {hoveredRegion.tagline}
-            </p>
-            {activeLayer !== "none" && (
-              <div className="pt-2 border-t border-black/10 flex justify-between items-center text-xs font-mono">
-                <span className="text-gray-700 font-bold uppercase">{activeLayer}:</span>
-                <span className={`font-bold ${hoveredRegion.id === 'dhaka' ? 'text-[#DC2626]' : 'text-[#006A4E]'}`}>
-                  {getIntensityValue(hoveredRegion)}% concentration
-                </span>
-              </div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

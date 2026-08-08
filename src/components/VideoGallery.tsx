@@ -51,13 +51,13 @@ export default function VideoGallery() {
   ];
 
   return (
-    <div className="space-y-4 my-2 font-sans">
-      <div className="flex items-center justify-between border-b border-black/10 pb-3">
+    <div className="space-y-4 my-2 font-sans text-white">
+      <div className="flex items-center justify-between border-b border-[#1E3E62] pb-3">
         <div className="flex items-center gap-2">
-          <Film className="w-4 h-4 text-[#1746A2]" />
-          <span className="text-xs font-mono uppercase font-bold text-gray-800">VIDEO CREATIVES & STORYBOARDS:</span>
+          <Film className="w-4 h-4 text-[#16C79A]" />
+          <span className="text-sm font-mono uppercase font-bold text-[#16C79A]">VIDEO CREATIVES & STORYBOARDS:</span>
         </div>
-        <span className="text-xs font-mono text-gray-500">3 HIGH-IMPACT SPOTS PRODUCED</span>
+        <span className="text-sm font-mono text-gray-300">3 HIGH-IMPACT SPOTS PRODUCED</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -71,33 +71,33 @@ export default function VideoGallery() {
               setActiveVideo(vid);
               setIsPlaying(false);
             }}
-            className="group rounded-2xl bg-white border border-black/10 p-4 space-y-3 shadow-sm hover:shadow-md hover:border-[#1746A2]/40 transition-all cursor-pointer"
+            className="group rounded-2xl bg-[#0B192C] border border-[#1E3E62] p-4 space-y-3 shadow-xl hover:border-[#16C79A] transition-all cursor-pointer"
           >
             {/* Simulated Video Player Box */}
             <div className={`h-40 rounded-xl bg-gradient-to-br ${vid.color} p-4 flex flex-col justify-between text-white relative overflow-hidden group-hover:scale-[1.01] transition-transform`}>
               <div className="flex justify-between items-center z-10">
-                <span className="text-[9px] font-mono uppercase bg-black/50 px-2 py-0.5 rounded font-bold border border-white/20">
+                <span className="text-sm font-mono uppercase bg-black/60 px-2 py-0.5 rounded font-bold border border-white/20">
                   {vid.type}
                 </span>
-                <span className="text-[10px] font-mono bg-black/40 px-2 py-0.5 rounded flex items-center gap-1">
-                  <Clock className="w-3 h-3" /> {vid.duration}
+                <span className="text-sm font-mono bg-black/60 px-2 py-0.5 rounded flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-[#16C79A]" /> {vid.duration}
                 </span>
               </div>
 
               {/* Center Play Button */}
-              <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center mx-auto my-auto text-white group-hover:bg-[#1746A2] group-hover:border-[#1746A2] transition-all shadow-lg">
-                <Play className="w-5 h-5 fill-white ml-0.5" />
+              <div className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-[#1E3E62] flex items-center justify-center mx-auto my-auto text-white group-hover:bg-[#1E3E62] group-hover:border-[#16C79A] transition-all shadow-lg">
+                <Play className="w-5 h-5 fill-[#16C79A] ml-0.5" />
               </div>
 
               <div className="z-10">
-                <p className="text-[10px] font-mono text-amber-300 font-bold">PLATFORM: {vid.platform}</p>
-                <h4 className="text-xs font-bold font-serif leading-tight">{vid.title}</h4>
+                <p className="text-sm font-mono text-amber-300 font-bold">PLATFORM: {vid.platform}</p>
+                <h4 className="text-lg font-bold font-serif text-white leading-tight">{vid.title}</h4>
               </div>
             </div>
 
             <div className="space-y-1">
-              <span className="text-[10px] font-mono text-gray-500 uppercase block">STORYBOARD SUMMARY:</span>
-              <p className="text-xs text-gray-700 leading-normal line-clamp-2">{vid.storyboard}</p>
+              <span className="text-sm font-mono text-[#16C79A] uppercase block font-bold">STORYBOARD SUMMARY:</span>
+              <p className="text-sm text-white leading-normal line-clamp-2">{vid.storyboard}</p>
             </div>
           </motion.div>
         ))}
@@ -105,26 +105,26 @@ export default function VideoGallery() {
 
       {/* Video Player Modal */}
       {activeVideo && (
-        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#EBE7DF] border border-black/20 max-w-2xl w-full rounded-2xl p-6 space-y-4 shadow-2xl relative">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-[#0B192C] border border-[#1E3E62] max-w-2xl w-full rounded-2xl p-6 space-y-4 shadow-2xl relative text-white">
             <button
               onClick={() => setActiveVideo(null)}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/10 text-black font-bold flex items-center justify-center hover:bg-black/20 cursor-pointer"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#000000] text-white border border-[#1E3E62] font-bold flex items-center justify-center hover:bg-[#16C79A] hover:text-black cursor-pointer"
             >
               ✕
             </button>
 
-            <span className="text-xs font-mono uppercase text-[#1746A2] font-bold tracking-widest block">
+            <span className="text-sm font-mono uppercase text-[#16C79A] font-bold tracking-widest block">
               VIDEO CREATIVE DEMO: {activeVideo.type}
             </span>
 
             {/* Interactive Player Screen */}
             <div className={`h-64 rounded-xl bg-gradient-to-br ${activeVideo.color} p-6 flex flex-col justify-between text-white relative overflow-hidden`}>
               <div className="flex justify-between items-center z-10">
-                <span className="text-xs font-mono bg-black/50 px-2.5 py-1 rounded font-bold border border-white/20">
+                <span className="text-sm font-mono bg-black/60 px-2.5 py-1 rounded font-bold border border-white/20">
                   {activeVideo.platform}
                 </span>
-                <span className="text-xs font-mono bg-black/50 px-2.5 py-1 rounded">
+                <span className="text-sm font-mono bg-black/60 px-2.5 py-1 rounded">
                   {activeVideo.duration}
                 </span>
               </div>
@@ -132,21 +132,21 @@ export default function VideoGallery() {
               <div className="my-auto text-center space-y-3 z-10">
                 <button
                   onClick={() => setIsPlaying(!isPlaying)}
-                  className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center mx-auto text-white hover:scale-110 hover:bg-[#1746A2] transition-all cursor-pointer shadow-xl"
+                  className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border border-[#1E3E62] flex items-center justify-center mx-auto text-white hover:scale-110 hover:bg-[#1E3E62] transition-all cursor-pointer shadow-xl"
                 >
-                  <Play className={`w-7 h-7 fill-white ${isPlaying ? "animate-pulse" : "ml-1"}`} />
+                  <Play className={`w-7 h-7 fill-[#16C79A] ${isPlaying ? "animate-pulse" : "ml-1"}`} />
                 </button>
-                <p className="text-xs font-mono text-amber-300 font-bold uppercase">
+                <p className="text-sm font-mono text-amber-300 font-bold uppercase">
                   {isPlaying ? "▶ NOW PLAYING PREVIEW SIMULATION..." : "CLICK TO PLAY STORYBOARD AUDIO"}
                 </p>
               </div>
 
               <div className="z-10">
-                <h3 className="text-lg font-bold font-serif">{activeVideo.title}</h3>
+                <h3 className="text-lg font-bold font-serif text-[#16C79A]">{activeVideo.title}</h3>
               </div>
             </div>
 
-            <div className="space-y-2 text-xs font-sans text-gray-800">
+            <div className="space-y-2 text-sm font-sans text-white">
               <p><strong>Storyboard Outline:</strong> {activeVideo.storyboard}</p>
               <p><strong>Audio Score Strategy:</strong> {activeVideo.audioTrack}</p>
             </div>

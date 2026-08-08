@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  ChevronDown,
-  ChevronUp,
   TrendingDown,
   TrendingUp,
   MapPin,
@@ -37,7 +35,6 @@ import {
 // Core Map & Interactive Components
 import MapRenderer from "./components/MapRenderer";
 import InvestigativeTree from "./components/InvestigativeTree";
-import CentralizationLoop from "./components/CentralizationLoop";
 import DigitalDecentralizationIllustration from "./components/DigitalDecentralizationIllustration";
 
 // Marketing & Campaign Framework Components
@@ -126,7 +123,7 @@ export default function App() {
     };
   }, []);
 
-  const totalSlides = 16;
+  const totalSlides = 15;
 
   const navigateToSlide = (index: number) => {
     if (index >= 0 && index < totalSlides) {
@@ -164,68 +161,67 @@ export default function App() {
 
   const slideHeaders = [
     "01. Team & Cover Page",
-    "02. Campaign Overview",
+    "02. Presentation Topic",
     "03. Social Context",
     "04. Problem Identification",
     "05. Root Cause Tree",
-    "06. Centralization Loop",
-    "07. Spatial Inequality",
-    "08. Social & Economic Costs",
-    "09. Paradigm Shift",
-    "10. Strategy: SWOT & 4Ps",
-    "11. Audience & AIDA Model",
-    "12. Content Design: Photo Gallery",
-    "13. Content Design: Video Gallery",
-    "14. Merchandise & Stalls",
-    "15. HR, Timeline & Budget",
-    "16. Delta Simulator & Vision"
+    "06. Spatial Inequality",
+    "07. Digital Careers",
+    "08. Paradigm Shift",
+    "09. Strategy: SWOT & 4Ps",
+    "10. Audience & AIDA Model",
+    "11. Content Design: Photo Gallery",
+    "12. Content Design: Video Gallery",
+    "13. Merchandise & Stalls",
+    "14. HR, Timeline & Budget",
+    "15. Delta Simulator & Vision"
   ];
 
   return (
     <div
-      className="min-h-screen bg-[#EBE7DF] text-[#111111] flex flex-col justify-between selection:bg-[#1746A2] selection:text-white overflow-hidden relative"
+      className="min-h-screen bg-[#000000] text-white flex flex-col justify-between selection:bg-[#16C79A] selection:text-black overflow-hidden relative"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       {/* TOP HEADER NAVIGATION */}
-      <header className="h-16 px-6 md:px-10 border-b border-black/10 z-30 flex items-center justify-between flex-shrink-0 bg-[#EBE7DF]">
+      <header className="h-16 px-6 md:px-10 border-b border-[#1E3E62] z-30 flex items-center justify-between flex-shrink-0 bg-[#000000]">
         <div className="flex items-center gap-4">
-          <div className="w-2.5 h-2.5 bg-[#1746A2] rounded-full shadow-[0_0_8px_#1746A2] animate-pulse"></div>
+          <div className="w-2.5 h-2.5 bg-[#16C79A] rounded-full shadow-[0_0_8px_#16C79A] animate-pulse"></div>
           <div>
-            <span className="text-xs font-bold tracking-[0.2em] uppercase font-mono text-gray-800">
+            <span className="text-sm font-bold tracking-[0.2em] uppercase font-mono text-[#16C79A]">
               SUMCT GRD-3216 // DECENTRALIZATION STUDY
             </span>
           </div>
         </div>
 
         {/* Global Progress Indicator */}
-        <div className="hidden md:flex items-center gap-4 text-[11px] tracking-widest uppercase font-mono text-gray-600">
-          <span className="text-[#1746A2] border-b-2 border-[#1746A2] pb-0.5 font-bold">16-PAGE EDITORIAL</span>
+        <div className="hidden md:flex items-center gap-4 text-sm tracking-widest uppercase font-mono text-gray-400">
+          <span className="text-[#16C79A] border-b-2 border-[#16C79A] pb-0.5 font-bold">16-PAGE EDITORIAL</span>
           <div className="flex items-center gap-2">
-            <span>PROGRESS:</span>
-            <span className="font-bold text-black">{Math.round((currentSlide / (totalSlides - 1)) * 100)}%</span>
-            <div className="w-16 h-1.5 bg-black/10 rounded-full overflow-hidden relative">
+            <span className="text-gray-300">PROGRESS:</span>
+            <span className="font-bold text-[#16C79A]">{Math.round((currentSlide / (totalSlides - 1)) * 100)}%</span>
+            <div className="w-16 h-1.5 bg-[#0B192C] rounded-full overflow-hidden relative border border-[#1E3E62]">
               <div
-                className="h-full bg-[#1746A2] transition-all duration-500 ease-out"
+                className="h-full bg-[#16C79A] transition-all duration-500 ease-out"
                 style={{ width: `${(currentSlide / (totalSlides - 1)) * 100}%` }}
               />
             </div>
           </div>
         </div>
 
-        <div className="text-right text-[10px] font-mono tracking-widest text-[#1746A2] font-bold hidden sm:flex items-center gap-3">
-          <span className="bg-[#1746A2]/10 border border-[#1746A2]/30 px-2 py-0.5 rounded text-black font-bold">
+        <div className="text-right text-sm font-mono tracking-widest text-[#16C79A] font-bold hidden sm:flex items-center gap-3">
+          <span className="bg-[#0B192C] border border-[#1E3E62] px-2 py-0.5 rounded text-white font-bold">
             LIVE: {currentDateString} • {currentTime}
           </span>
-          <span>23.0225° N 72.5714° E</span>
+          <span className="text-gray-400">23.0225° N 72.5714° E</span>
         </div>
       </header>
 
       {/* MAIN STAGE */}
       <main className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-6 p-4 md:p-6 items-stretch relative z-20">
         {/* Left Side Navigation Sidebar */}
-        <nav className="xl:col-span-2 hidden xl:flex flex-col gap-1.5 justify-center py-2 bg-black/5 border-r border-black/10 pr-3 overflow-y-auto max-h-[82vh]">
-          <span className="text-[9px] uppercase font-mono tracking-widest text-gray-500 mb-1">Index (16 Pages)</span>
+        <nav className="xl:col-span-2 hidden xl:flex flex-col gap-1.5 justify-center py-2 bg-[#000000] border-r border-[#1E3E62] pr-3 overflow-y-auto max-h-[82vh]">
+          <span className="text-sm uppercase font-mono tracking-widest text-[#16C79A] mb-1 font-bold">Index (16 Pages)</span>
           {slideHeaders.map((headerText, idx) => {
             const isCurrent = currentSlide === idx;
             const isCompleted = currentSlide > idx;
@@ -234,23 +230,22 @@ export default function App() {
               <button
                 key={idx}
                 onClick={() => navigateToSlide(idx)}
-                className={`py-1.5 px-2.5 text-left rounded-md text-[11px] font-medium font-sans transition-all duration-200 flex items-center justify-between cursor-pointer ${
-                  isCurrent
-                    ? "text-white bg-[#1746A2] font-bold shadow-sm"
-                    : isCompleted
-                    ? "text-gray-700 hover:text-black hover:bg-black/5"
-                    : "text-gray-500 hover:text-gray-800"
-                }`}
+                className={`py-1.5 px-2.5 text-left rounded-md text-sm font-sans transition-all duration-200 flex items-center justify-between cursor-pointer ${isCurrent
+                  ? "text-white bg-[#16C79A] font-bold shadow-md"
+                  : isCompleted
+                    ? "text-white bg-[#0B192C] font-semibold border border-[#1E3E62]"
+                    : "text-white bg-[#0B192C]/60 hover:bg-[#0B192C] font-medium border border-[#1E3E62]/50 opacity-90 hover:opacity-100"
+                  }`}
               >
                 <span className="truncate">{headerText}</span>
-                {isCompleted && <span className="w-1.5 h-1.5 rounded-full bg-[#1746A2]" />}
+                {isCompleted && <span className="w-1.5 h-1.5 rounded-full bg-[#16C79A]" />}
               </button>
             );
           })}
         </nav>
 
         {/* Display Stage */}
-        <div className="xl:col-span-10 flex flex-col justify-center items-center max-h-[84vh] overflow-hidden">
+        <div className="xl:col-span-10 flex flex-col justify-center items-center max-h-[90vh] overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
@@ -258,7 +253,7 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.97, y: -4 }}
               transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
-              className="w-full max-h-[84vh] overflow-y-auto flex flex-col justify-between"
+              className="w-full max-h-[90vh] overflow-hidden flex flex-col justify-between"
             >
               {/* --- PAGE 01: DEDICATED TEAM-V SHOWCASE PAGE --- */}
               {currentSlide === 0 && (
@@ -272,384 +267,407 @@ export default function App() {
 
               {/* --- PAGE 03: SOCIAL CONTEXT --- */}
               {currentSlide === 2 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 items-center my-2.5">
-                    <div className="lg:col-span-6 space-y-2.5">
-                      <span className="text-xs font-mono text-[#DC2626] font-bold uppercase tracking-widest">
-                        03. Social Issue Background
-                      </span>
-                      <h2 className="text-3xl sm:text-4xl font-bold font-serif text-black leading-tight">
-                        Why Does Everyone Move to <br /><span className="text-[#1746A2]">Dhaka?</span>
-                      </h2>
-                      <p className="text-xs text-gray-700 font-sans leading-relaxed">
-                        Over <strong className="text-black">36.6 million citizens</strong> (20%+ of Bangladesh's population) are packed into Dhaka Metropolitan area—just <strong className="text-[#1746A2]">0.2% of national land</strong>.
-                      </p>
-                      <div className="p-4 rounded-2xl border border-black/15 bg-white space-y-2.5 shadow-sm">
-                        <span className="text-xs font-mono text-[#DC2626] font-bold uppercase">Thesis Statement</span>
-                        <p className="text-xs text-black font-medium">Migration is not a personal preference—it is a human reaction to structural monopolization of opportunities.</p>
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch h-full z-10 relative">
+                    {/* LEFT COLUMN: TEXT & THESIS */}
+                    <div className="lg:col-span-7 flex flex-col justify-center space-y-4">
+                      <div className="space-y-3">
+                        <span className="inline-block px-3 py-1 rounded-full bg-[#16C79A]/10 border border-[#16C79A]/40 text-[#16C79A] text-xs font-mono font-bold uppercase tracking-widest">
+                          SOCIAL CONTEXT & DEMOGRAPHICS
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-serif text-[#16C79A] leading-tight uppercase">
+                          Why Does Everyone <br /><span className="text-white">Move to Dhaka?</span>
+                        </h2>
+                        <div className="w-full h-0.5 bg-gradient-to-r from-[#16C79A] via-[#1E3E62] to-transparent mt-1" />
+
+                        <p className="text-base text-white font-sans leading-relaxed pt-1">
+                          Over <strong className="text-[#16C79A]">36.6 million citizens</strong> (20%+ of Bangladesh's total population) are squeezed into Dhaka Metropolitan area—occupying just <strong className="text-[#16C79A]">0.2% of total national land</strong>.
+                        </p>
+
+                        <div className="p-4 rounded-xl border border-[#1E3E62] bg-[#0B192C] space-y-2 shadow-md">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-[#DC2626] animate-pulse" />
+                            <span className="text-xs font-mono text-[#DC2626] font-bold uppercase tracking-wider">THESIS STATEMENT</span>
+                          </div>
+                          <p className="text-sm text-white font-medium font-sans leading-relaxed">
+                            Migration is not a personal preference—it is a direct human reaction to the structural monopolization of opportunities in a single mega-city.
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    <div className="lg:col-span-6 flex flex-col justify-center">
-                      <span className="text-xs font-mono text-gray-500 uppercase tracking-widest mb-2 font-bold">LIVE MIGRATION FLUX VECTOR</span>
+
+                    {/* RIGHT COLUMN: BANGLADESH MAP */}
+                    <div className="lg:col-span-5 flex flex-col justify-center items-center h-full">
                       <MapRenderer showMigrationFlows={true} />
                     </div>
-                  </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 03 of 16 — Social Background</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Facts & Statistics →
-                    </button>
                   </div>
                 </div>
               )}
 
               {/* --- PAGE 04: PROBLEM IDENTIFICATION & INTERACTIVE GRAPHS --- */}
               {currentSlide === 3 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col space-y-2.5 justify-start">
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col gap-5">
+                  {/* TIER 1: HEADER ROW */}
                   <div className="flex justify-between items-start">
-                    <div className="space-y-2.5">
-                      <span className="text-xs font-mono text-[#DC2626] uppercase tracking-widest font-bold">04. Interactive Facts & Visual Graphs</span>
-                      <h2 className="text-2xl font-bold font-display text-black">Dhaka Is Reaching Its <span className="text-[#1746A2]">Limits</span></h2>
+                    <div className="space-y-1">
+                      <h2 className="text-2xl font-bold font-display text-[#16C79A]">Dhaka Is Reaching Its <span className="text-white">Limits</span></h2>
                     </div>
-                    <div className="text-right text-xs font-mono">
-                      <span className="text-[10px] font-mono bg-black text-white px-2.5 py-1 rounded font-bold uppercase tracking-wider block">
+                    <div className="text-right text-sm font-mono">
+                      <span className="text-sm font-mono bg-[#0B192C] text-[#16C79A] border border-[#1E3E62] px-2.5 py-1 rounded font-bold uppercase tracking-wider block">
                         LIVE AUDIT: {currentDateString}
                       </span>
-                      <span className="text-[10px] font-mono text-[#1746A2] font-bold mt-1 block">
+                      <span className="text-sm font-mono text-gray-300 font-bold mt-1 block">
                         TIME: {currentTime}
                       </span>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 my-0">
-                    {/* Ticker 1: Live Density */}
-                    <div className="p-3.5 rounded-xl bg-white border border-black/15 shadow-sm space-y-1 relative overflow-hidden group">
+
+                  {/* TIER 2: 4 METRIC BOXES IN A ROW */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
+                    <div className="p-3.5 rounded-xl bg-[#0B192C] border border-[#1E3E62] shadow-sm space-y-1 relative overflow-hidden group">
                       <div className="flex justify-between items-center">
-                        <Activity className="w-4 h-4 text-[#DC2626]" />
-                        <span className="flex items-center gap-1 text-[8px] font-mono font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                        <Activity className="w-4 h-4 text-white" />
+                        <span className="flex items-center gap-1 text-sm font-mono font-bold text-white bg-[#1E3E62]/60 px-1.5 py-0.5 rounded border border-[#1E3E62]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-ping" />
                           LIVE TICK
                         </span>
                       </div>
-                      <span className="text-[9px] font-mono text-gray-500 uppercase block font-bold">DENSITY</span>
-                      <p className="text-base font-bold font-mono text-black tracking-tight">{liveDensity.toFixed(2)} / km²</p>
+                      <span className="text-sm font-mono text-[#16C79A] uppercase block font-bold">DENSITY</span>
+                      <p className="text-base font-extrabold font-mono tracking-tight" style={{ color: "#DC2626" }}>{liveDensity.toFixed(2)} / km²</p>
                     </div>
-
-                    {/* Ticker 2: Live Population Inflow */}
-                    <div className="p-3.5 rounded-xl bg-white border border-black/15 shadow-sm space-y-1 relative overflow-hidden group">
+                    <div className="p-3.5 rounded-xl bg-[#0B192C] border border-[#1E3E62] shadow-sm space-y-1 relative overflow-hidden group">
                       <div className="flex justify-between items-center">
-                        <Briefcase className="w-4 h-4 text-[#1746A2]" />
-                        <span className="flex items-center gap-1 text-[8px] font-mono font-bold text-[#1746A2] bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#1746A2] animate-ping" />
+                        <Briefcase className="w-4 h-4 text-white" />
+                        <span className="flex items-center gap-1 text-sm font-mono font-bold text-white bg-[#1E3E62]/60 px-1.5 py-0.5 rounded border border-[#1E3E62]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-ping" />
                           REALTIME
                         </span>
                       </div>
-                      <span className="text-[9px] font-mono text-gray-500 uppercase block font-bold">POPULATION INFLOW</span>
-                      <p className="text-base font-bold font-mono text-black tracking-tight">{livePopulation.toLocaleString()}</p>
+                      <span className="text-sm font-mono text-[#16C79A] uppercase block font-bold">CURRENT POPULATION OF DHAKA</span>
+                      <p className="text-base font-extrabold font-mono tracking-tight" style={{ color: "#DC2626" }}>{livePopulation.toLocaleString()}</p>
                     </div>
-
-                    {/* Ticker 3: Daily Arrivals Today */}
-                    <div className="p-3.5 rounded-xl bg-white border border-black/15 shadow-sm space-y-1 relative overflow-hidden group">
+                    <div className="p-3.5 rounded-xl bg-[#0B192C] border border-[#1E3E62] shadow-sm space-y-1 relative overflow-hidden group">
                       <div className="flex justify-between items-center">
-                        <HeartPulse className="w-4 h-4 text-emerald-600" />
-                        <span className="flex items-center gap-1 text-[8px] font-mono font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                        <HeartPulse className="w-4 h-4 text-white" />
+                        <span className="flex items-center gap-1 text-sm font-mono font-bold text-white bg-[#1E3E62]/60 px-1.5 py-0.5 rounded border border-[#1E3E62]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-ping" />
                           LIVE
                         </span>
                       </div>
-                      <span className="text-[9px] font-mono text-gray-500 uppercase block font-bold">DAILY ARRIVALS TODAY</span>
-                      <p className="text-base font-bold font-mono text-emerald-600 tracking-tight">+{arrivalsToday.toLocaleString()}</p>
+                      <span className="text-sm font-mono text-[#16C79A] uppercase block font-bold">DAILY ARRIVALS</span>
+                      <p className="text-base font-extrabold font-mono tracking-tight" style={{ color: "#DC2626" }}>+{arrivalsToday.toLocaleString()}</p>
                     </div>
-
-                    {/* Ticker 4: Realtime Gridlock Loss */}
-                    <div className="p-3.5 rounded-xl bg-white border border-black/15 shadow-sm space-y-1 relative overflow-hidden group">
+                    <div className="p-3.5 rounded-xl bg-[#0B192C] border border-[#1E3E62] shadow-sm space-y-1 relative overflow-hidden group">
                       <div className="flex justify-between items-center">
-                        <TrendingDown className="w-4 h-4 text-[#DC2626]" />
-                        <span className="flex items-center gap-1 text-[8px] font-mono font-bold text-[#DC2626] bg-red-50 px-1.5 py-0.5 rounded border border-red-200">
+                        <TrendingDown className="w-4 h-4 text-white" />
+                        <span className="flex items-center gap-1 text-sm font-mono font-bold text-white bg-[#1E3E62]/60 px-1.5 py-0.5 rounded border border-[#1E3E62]">
                           <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] animate-ping" />
                           TICKING
                         </span>
                       </div>
-                      <span className="text-[9px] font-mono text-gray-500 uppercase block font-bold">GRIDLOCK LOSS</span>
-                      <p className="text-base font-bold font-mono text-[#DC2626] tracking-tight">৳ {trafficLoss.toLocaleString()}</p>
+                      <span className="text-sm font-mono text-[#16C79A] uppercase block font-bold">GRIDLOCK LOSS</span>
+                      <p className="text-base font-extrabold font-mono tracking-tight" style={{ color: "#DC2626" }}>৳ {trafficLoss.toLocaleString()}</p>
                     </div>
                   </div>
+
+                  {/* TIER 3 (5 TABS) & TIER 4 (BIG CARD) */}
                   <InteractiveDataCharts />
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 04 of 16 — Facts & Statistics</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Root Cause Tree →
-                    </button>
-                  </div>
                 </div>
               )}
 
               {/* --- PAGE 05: ROOT CAUSE TREE --- */}
               {currentSlide === 4 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
-                  <div className="space-y-2.5">
-                    <span className="text-xs font-mono text-[#1746A2] uppercase tracking-widest font-bold">05. Investigative Breakdown</span>
-                    <h2 className="text-2xl font-bold font-display text-black">Why Do People Leave Their <span className="text-[#1746A2]">Hometowns?</span></h2>
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col gap-4 justify-between">
+                  <div className="flex justify-between items-center border-b border-[#1E3E62] pb-3">
+                    <div>
+                      <span className="text-sm font-mono text-[#16C79A] uppercase font-bold tracking-wider flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#16C79A]" />
+                        ROOT CAUSE ANALYSIS & MIGRATION DRIVERS
+                      </span>
+                      <h2 className="text-2xl font-bold font-sans text-white">Why Do People Leave Their <span className="text-[#16C79A]">Hometowns?</span></h2>
+                    </div>
+                    <span className="text-sm font-mono text-white font-bold bg-[#1E3E62] px-3 py-1 rounded-lg border border-[#16C79A]/60 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#16C79A]" />
+                      DOSSIER ARCHIVE: GRD-3216
+                    </span>
                   </div>
-                  <div className="my-2.5">
+                  <div className="flex-1 flex flex-col justify-between">
                     <InvestigativeTree />
                   </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 05 of 16 — Root Cause Tree</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Centralization Loop →
-                    </button>
-                  </div>
                 </div>
               )}
 
-              {/* --- PAGE 06: CENTRALIZATION LOOP --- */}
+              {/* --- PAGE 06: SPATIAL INEQUALITY HEATMAP --- */}
               {currentSlide === 5 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
-                  <div className="space-y-2.5">
-                    <span className="text-xs font-mono text-[#DC2626] uppercase tracking-widest font-bold">06. Self-Reinforcing Spiral</span>
-                    <h2 className="text-2xl font-bold font-display text-black">The Centralization <span className="text-[#1746A2]">Engine</span></h2>
-                  </div>
-                  <div className="my-2.5">
-                    <CentralizationLoop />
-                  </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 06 of 16 — Systemic Loop</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Spatial Inequality →
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* --- PAGE 07: SPATIAL INEQUALITY HEATMAP --- */}
-              {currentSlide === 6 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 items-center my-2.5">
-                    <div className="lg:col-span-5 space-y-2.5">
-                      <div className="space-y-2.5">
-                        <span className="text-xs font-mono text-[#1746A2] uppercase tracking-widest font-bold">07. Spatial Inequality</span>
-                        <h2 className="text-2xl font-bold font-display text-black">Where Is Opportunity <span className="text-[#1746A2]">Located?</span></h2>
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch h-full z-10 relative">
+                    {/* LEFT COLUMN: HEADING & 4 BUTTONS */}
+                    <div className="lg:col-span-7 flex flex-col justify-center space-y-4">
+                      <div className="space-y-2">
+                        <span className="inline-block px-3 py-1 rounded-full bg-[#16C79A]/10 border border-[#16C79A]/40 text-[#16C79A] text-xs font-mono font-bold uppercase tracking-widest">
+                          SPATIAL HEATMAP AUDIT
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl font-bold font-display text-[#16C79A]">
+                          Where Is Opportunity <span className="text-white">Located?</span>
+                        </h2>
+                        <div className="w-full h-0.5 bg-gradient-to-r from-[#16C79A] via-[#1E3E62] to-transparent mt-1" />
+                        <p className="text-sm text-gray-300 font-sans">
+                          Select an infrastructure layer below to inspect the geographic distribution of critical resources across Bangladesh.
+                        </p>
                       </div>
-                      <div className="flex flex-col gap-2.5">
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 my-2">
                         {[
-                          { id: "jobs", label: "Corporate Jobs", desc: "Private jobs and formal commerce", icon: <Briefcase className="w-4 h-4 text-[#1746A2]" /> },
-                          { id: "universities", label: "Branch Universities", desc: "Top engineering & medical campuses", icon: <GraduationCap className="w-4 h-4 text-emerald-600" /> },
+                          { id: "jobs", label: "Corporate Jobs", desc: "Private jobs and formal commerce", icon: <Briefcase className="w-4 h-4 text-[#16C79A]" /> },
+                          { id: "universities", label: "Branch Universities", desc: "Top engineering & medical campuses", icon: <GraduationCap className="w-4 h-4 text-[#16C79A]" /> },
                           { id: "hospitals", label: "Specialized Healthcare", desc: "Equipped referral clinics & ICU setups", icon: <HeartPulse className="w-4 h-4 text-[#DC2626]" /> },
-                          { id: "investment", label: "Venture Investment", desc: "Credit allocations & private finance HQs", icon: <Sliders className="w-4 h-4 text-[#1746A2]" /> }
+                          { id: "investment", label: "Venture Investment", desc: "Credit allocations & private finance HQs", icon: <Sliders className="w-4 h-4 text-[#16C79A]" /> }
                         ].map((lay) => (
-                          <button key={lay.id} onClick={() => setOpportunityLayer(lay.id as HeatmapLayer)} className={`p-2.5 text-left rounded-xl border flex items-center gap-3 cursor-pointer transition-all ${opportunityLayer === lay.id ? "border-[#1746A2] bg-white font-bold shadow-sm" : "border-black/10 bg-white/60 text-gray-700 hover:bg-white"}`}>
-                            <span>{lay.icon}</span>
-                            <div><p className="text-xs font-bold">{lay.label}</p><p className="text-[10px] text-gray-500">{lay.desc}</p></div>
+                          <button
+                            key={lay.id}
+                            onClick={() => setOpportunityLayer(lay.id as HeatmapLayer)}
+                            className={`p-3.5 text-left rounded-xl border flex items-center gap-3.5 cursor-pointer transition-all ${opportunityLayer === lay.id
+                              ? "border-[#16C79A] bg-[#1E3E62] font-bold text-white shadow-md ring-1 ring-[#16C79A]"
+                              : "border-[#1E3E62] bg-[#0B192C] text-white hover:bg-[#1E3E62]/60"
+                              }`}
+                          >
+                            <span className="p-2 rounded-lg bg-[#000000]/60 border border-[#1E3E62]">
+                              {lay.icon}
+                            </span>
+                            <div>
+                              <p className="text-sm font-bold text-white">{lay.label}</p>
+                              <p className="text-xs text-gray-300 font-sans">{lay.desc}</p>
+                            </div>
                           </button>
                         ))}
                       </div>
                     </div>
-                    <div className="lg:col-span-7 flex flex-col justify-center">
+
+                    {/* RIGHT COLUMN: BANGLADESH MAP */}
+                    <div className="lg:col-span-5 flex flex-col justify-center items-center h-full">
                       <MapRenderer activeLayer={opportunityLayer} />
                     </div>
                   </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 07 of 16 — Spatial Heatmap</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Economic Costs →
-                    </button>
-                  </div>
                 </div>
               )}
 
-              {/* --- PAGE 08: SOCIAL & ECONOMIC COSTS --- */}
-              {currentSlide === 7 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
-                  <div className="space-y-2.5">
-                    <span className="text-xs font-mono text-[#DC2626] uppercase tracking-widest font-bold">08. Imbalanced Scales</span>
-                    <h2 className="text-2xl font-bold font-display text-black">What Does Centralization <span className="text-[#1746A2]">Cost?</span></h2>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 my-2.5">
-                    <div className="p-6 rounded-2xl bg-white border border-[#DC2626]/30 space-y-2.5 shadow-sm">
-                      <h4 className="text-base font-bold text-[#DC2626]">Dhaka: The Bursting Bubble</h4>
-                      <p className="text-xs text-gray-700 leading-relaxed">50-65% entry salary spent on rent, 2.5-hour daily traffic delays, 3m annual groundwater depletion.</p>
+              {/* --- PAGE 07: DIGITAL DECENTRALIZATION CAREERS --- */}
+              {currentSlide === 6 && (
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
+                  <div className="flex justify-between items-center border-b border-[#1E3E62] pb-3">
+                    <div>
+                      <span className="text-sm font-mono text-[#16C79A] uppercase font-bold tracking-wider flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#16C79A]" />
+                        REMOTE WORK & HIGH-VALUE DIGITAL ECONOMY
+                      </span>
+                      <h2 className="text-2xl font-bold font-sans text-white">Digital Decentralization <span className="text-[#16C79A]">Careers</span></h2>
                     </div>
-                    <div className="p-6 rounded-2xl bg-white border border-[#1746A2]/30 space-y-2.5 shadow-sm">
-                      <h4 className="text-base font-bold text-[#1746A2]">The Districts: Cold Brain Drain</h4>
-                      <p className="text-xs text-gray-700 leading-relaxed">82% graduate drainage, agricultural decay from lack of processing plants, zero local venture lending.</p>
-                    </div>
-                  </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 08 of 16 — Imbalanced Scales</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Paradigm Shift →
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* --- PAGE 09: PARADIGM SHIFT --- */}
-              {currentSlide === 8 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
-                  <div className="my-2.5 flex flex-col justify-center items-center text-center p-8 rounded-2xl border border-black/15 bg-white shadow-sm space-y-2.5 max-w-3xl mx-auto">
-                    <span className="text-xs font-mono text-[#DC2626] uppercase font-bold border border-[#DC2626]/30 px-3 py-1 rounded-full bg-red-50">
-                      POLITICAL REFRAMING CORE
+                    <span className="text-sm font-mono text-white font-bold bg-[#1E3E62] px-3 py-1 rounded-lg border border-[#16C79A]/60 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#16C79A]" />
+                      GLOBAL CLIENT INFLOW
                     </span>
-                    <h2 className="text-3xl sm:text-5xl font-bold font-serif text-black leading-tight">We Have Been Solving the <br /><span className="text-[#1746A2]">Wrong Problem</span></h2>
-                    <p className="text-lg italic text-[#1746A2] font-serif font-bold">"People don’t move because they love cities. They move because opportunity moves first."</p>
                   </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 09 of 16 — Paradigm Shift</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Strategy (SWOT & 4Ps) →
-                    </button>
+                  <div className="flex-1 flex flex-col justify-between pt-2">
+                    <DigitalDecentralizationIllustration />
                   </div>
                 </div>
               )}
 
-              {/* --- PAGE 10: STRATEGY (SWOT & 4Ps) --- */}
-              {currentSlide === 9 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
-                  <div className="space-y-2.5">
-                    <span className="text-xs font-mono text-[#1746A2] uppercase tracking-widest font-bold">10. Marketing Frameworks</span>
-                    <h2 className="text-2xl font-bold font-display text-black">SWOT Matrix & <span className="text-[#1746A2]">The 4Ps</span></h2>
+              {/* --- PAGE 08: PARADIGM SHIFT --- */}
+              {currentSlide === 7 && (
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
+                  {/* Top Header Bar */}
+                  <div className="flex justify-between items-center border-b border-[#1E3E62] pb-3">
+                    <span className="text-sm font-mono text-[#16C79A] uppercase font-bold tracking-wider flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#16C79A]" />
+                      CORE PARADIGM SHIFT // FIRST-PRINCIPLES DIAGNOSIS
+                    </span>
+                    <span className="text-sm font-mono text-white font-bold bg-[#1E3E62] px-3 py-1 rounded-lg border border-[#16C79A]/60 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#16C79A]" />
+                      THE CENTRAL THESIS
+                    </span>
                   </div>
-                  <div className="my-2.5 space-y-2.5">
+
+                  {/* Perfectly Centered Content Area */}
+                  <div className="flex-1 flex flex-col items-center justify-center my-auto relative z-10 py-6">
+                    {/* Ambient Glow */}
+                    <div className="absolute w-96 h-96 bg-[#16C79A]/10 rounded-full blur-3xl pointer-events-none" />
+
+                    <div className="flex flex-col justify-center items-center text-center p-8 sm:p-12 rounded-3xl border border-[#16C79A]/40 bg-[#0B192C]/90 shadow-2xl space-y-6 max-w-4xl mx-auto backdrop-blur-sm relative">
+                      {/* Top Pill */}
+                      <span className="px-4 py-1 rounded-full bg-[#16C79A]/10 border border-[#16C79A]/40 text-[#16C79A] text-xs font-mono font-bold uppercase tracking-widest">
+                        FIRST-PRINCIPLES INSIGHT
+                      </span>
+
+                      {/* Main Big Statement */}
+                      <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black font-serif text-[#16C79A] leading-tight drop-shadow-md">
+                        We Have Been Solving the <br />
+                        <span className="text-white">Wrong Problem</span>
+                      </h2>
+
+                      <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#16C79A] to-transparent rounded-full" />
+
+                      {/* The Quote */}
+                      <p className="text-lg sm:text-2xl italic text-[#16C79A] font-serif font-bold max-w-2xl leading-relaxed">
+                        “People don’t move because they love cities. They move because opportunity moves first.”
+                      </p>
+
+                      {/* Supporting 3 Paradigm Anchors */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full pt-4 border-t border-[#1E3E62]/80 text-left">
+                        <div className="p-3 rounded-xl bg-[#000000]/60 border border-[#1E3E62] space-y-1">
+                          <span className="text-[11px] font-mono text-gray-400 font-bold block uppercase">01. OLD DOGMA</span>
+                          <p className="text-xs font-sans text-gray-200">Expand mega-city roads & build flyovers endlessly.</p>
+                        </div>
+                        <div className="p-3 rounded-xl bg-[#000000]/60 border border-[#1E3E62] space-y-1">
+                          <span className="text-[11px] font-mono text-[#DC2626] font-bold block uppercase">02. SYSTEM FAILURE</span>
+                          <p className="text-xs font-sans text-gray-200">Mega-cities absorb traffic without fixing rural resource drain.</p>
+                        </div>
+                        <div className="p-3 rounded-xl bg-[#000000]/60 border border-[#16C79A]/50 space-y-1">
+                          <span className="text-[11px] font-mono text-[#16C79A] font-bold block uppercase">03. TRUE SOLUTION</span>
+                          <p className="text-xs font-sans text-white font-medium">Distribute the gravity of capital, universities & high-value jobs.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Footer Bar */}
+                  <div className="pt-3 border-t border-[#1E3E62] text-xs font-mono text-gray-300 flex justify-between font-bold">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#16C79A]" />
+                      ARCHITECTURAL THESIS: GRD-3216
+                    </span>
+                    <span className="text-[#16C79A]">OPPORTUNITY DISTRIBUTION VECTOR</span>
+                  </div>
+                </div>
+              )}
+
+              {/* --- PAGE 09: STRATEGY (SWOT & 4Ps) --- */}
+              {currentSlide === 8 && (
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative pt-4 px-4 pb-[10px] sm:pt-5 sm:px-5 sm:pb-[10px] rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between space-y-2">
+                  <div className="space-y-1">
+                    <h2 className="text-2xl font-bold font-display text-[#16C79A]">SWOT Matrix & <span className="text-white">The 4Ps</span></h2>
+                  </div>
+                  <div className="my-1 space-y-2 flex-1 flex flex-col justify-between">
                     <SWOTMatrix />
                     <MarketingMix4Ps />
                   </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 10 of 16 — Strategy Frameworks</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Audience & AIDA →
-                    </button>
-                  </div>
                 </div>
               )}
 
-              {/* --- PAGE 11: AUDIENCE & AIDA MODEL --- */}
-              {currentSlide === 10 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
-                  <div className="space-y-2.5">
-                    <span className="text-xs font-mono text-[#DC2626] uppercase tracking-widest font-bold">11. Audience & Funnel</span>
-                    <h2 className="text-2xl font-bold font-display text-black">Target Segmentation & <span className="text-[#1746A2]">AIDA Model</span></h2>
+              {/* --- PAGE 10: AUDIENCE & AIDA MODEL --- */}
+              {currentSlide === 9 && (
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-4 sm:p-5 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-start space-y-2">
+                  <div className="space-y-1">
+                    <h2 className="text-2xl font-bold font-display text-[#16C79A]">Target Segmentation & <span className="text-white">AIDA Model</span></h2>
                   </div>
-                  <div className="my-2.5 space-y-2.5">
+                  <div className="my-1 space-y-2">
                     <AudienceSegmentation />
                     <AIDAFunnel />
                   </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 11 of 16 — Audience & Funnel</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Photo Gallery →
-                    </button>
-                  </div>
                 </div>
               )}
 
-              {/* --- PAGE 12: CREATIVE CONTENT DESIGN — PHOTO GALLERY --- */}
-              {currentSlide === 11 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
+              {/* --- PAGE 11: CREATIVE CONTENT DESIGN — PHOTO GALLERY --- */}
+              {currentSlide === 10 && (
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
                   <div className="space-y-2.5">
-                    <span className="text-xs font-mono text-[#1746A2] uppercase tracking-widest font-bold">12. Creative Content Design (Part 1)</span>
-                    <h2 className="text-2xl font-bold font-display text-black">Photo Gallery: <span className="text-[#1746A2]">Static & Print Creatives</span></h2>
+                    <h2 className="text-2xl font-bold font-display text-[#16C79A]">Photo Gallery: <span className="text-white">Static & Print Creatives</span></h2>
                   </div>
                   <div className="my-2.5">
                     <PhotoGallery />
                   </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 12 of 16 — Photo Gallery</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Video Gallery →
-                    </button>
-                  </div>
                 </div>
               )}
 
-              {/* --- PAGE 13: CREATIVE CONTENT DESIGN — VIDEO GALLERY --- */}
-              {currentSlide === 12 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
+              {/* --- PAGE 12: CREATIVE CONTENT DESIGN — VIDEO GALLERY --- */}
+              {currentSlide === 11 && (
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
                   <div className="space-y-2.5">
-                    <span className="text-xs font-mono text-[#DC2626] uppercase tracking-widest font-bold">13. Creative Content Design (Part 2)</span>
-                    <h2 className="text-2xl font-bold font-display text-black">Video Gallery: <span className="text-[#1746A2]">TikTok, Reels & OVC Storyboards</span></h2>
+                    <h2 className="text-2xl font-bold font-display text-[#16C79A]">Video Gallery: <span className="text-white">TikTok, Reels & OVC Storyboards</span></h2>
                   </div>
                   <div className="my-2.5">
                     <VideoGallery />
                   </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 13 of 16 — Video Gallery</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Merchandise & Stalls →
-                    </button>
-                  </div>
                 </div>
               )}
 
-              {/* --- PAGE 14: MERCHANDISING, PROPS & STALLS --- */}
-              {currentSlide === 13 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
+              {/* --- PAGE 13: MERCHANDISING, PROPS & STALLS --- */}
+              {currentSlide === 12 && (
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
                   <div className="space-y-2.5">
-                    <span className="text-xs font-mono text-[#1746A2] uppercase tracking-widest font-bold">14. Campaign Deliverables</span>
-                    <h2 className="text-2xl font-bold font-display text-black">Merchandising, Props & <span className="text-[#1746A2]">Campus Stalls</span></h2>
+                    <h2 className="text-2xl font-bold font-display text-[#16C79A]">Merchandising, Props & <span className="text-white">Campus Stalls</span></h2>
                   </div>
                   <div className="my-2.5">
                     <MerchandiseShowcase />
                   </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 14 of 16 — Merchandise & Stalls</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Timeline & Budget →
-                    </button>
-                  </div>
                 </div>
               )}
 
-              {/* --- PAGE 15: HR, TIMELINE & BUDGET --- */}
-              {currentSlide === 14 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
+              {/* --- PAGE 14: HR, TIMELINE & BUDGET --- */}
+              {currentSlide === 13 && (
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
                   <div className="space-y-2.5">
-                    <span className="text-xs font-mono text-[#DC2626] uppercase tracking-widest font-bold">15. Execution Operations</span>
-                    <h2 className="text-2xl font-bold font-display text-black">HR Roles, Timeline & <span className="text-[#1746A2]">Estimated Budget</span></h2>
+                    <h2 className="text-2xl font-bold font-display text-[#16C79A]">HR Roles, Timeline & <span className="text-white">Estimated Budget</span></h2>
                   </div>
                   <div className="my-2.5 space-y-2.5">
                     <CampaignTimeline />
                     <CampaignBudget />
                   </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 15 of 16 — HR & Budget</span>
-                    <button onClick={handleNext} className="px-4 py-1.5 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                      Next: Delta Simulator & Vision →
-                    </button>
-                  </div>
                 </div>
               )}
 
-              {/* --- PAGE 16: DELTA SIMULATOR & VISION --- */}
-              {currentSlide === 15 && (
-                <div className="w-full h-[80vh] min-h-[580px] bg-[#EBE7DF] text-black font-mono relative p-5 sm:p-6 rounded-2xl border border-black/15 shadow-sm overflow-hidden select-none flex flex-col justify-between">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-2.5 items-center my-2.5">
-                    <div className="lg:col-span-5 space-y-2.5">
-                      <div className="space-y-2.5">
-                        <span className="text-xs font-mono text-[#1746A2] uppercase tracking-widest font-bold">16. Dynamic Simulation & Climax</span>
-                        <h2 className="text-2xl font-bold font-display text-black">A Stronger Bangladesh <span className="text-[#1746A2]">Doesn't Depend</span> on One City</h2>
-                        <p className="text-xs text-gray-700 leading-relaxed font-sans">Decentralization unlocks the true latent human capital of every district across our fertile delta.</p>
+              {/* --- PAGE 15: DELTA SIMULATOR & VISION --- */}
+              {currentSlide === 14 && (
+                <div className="w-full h-[86vh] min-h-[660px] bg-[#000000] text-white font-mono relative p-5 sm:p-6 rounded-2xl border border-[#1E3E62] shadow-xl overflow-hidden flex flex-col justify-between">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch h-full z-10 relative">
+                    {/* LEFT COLUMN: CONTROLS & VISION */}
+                    <div className="lg:col-span-7 flex flex-col justify-center space-y-4">
+                      <div className="space-y-3">
+                        <span className="inline-block px-3 py-1 rounded-full bg-[#16C79A]/10 border border-[#16C79A]/40 text-[#16C79A] text-xs font-mono font-bold uppercase tracking-widest">
+                          DECENTRALIZATION POLICY SIMULATOR
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-serif text-[#16C79A] leading-tight uppercase">
+                          A Stronger Bangladesh <br /><span className="text-white">Doesn't Depend on One City</span>
+                        </h2>
+                        <div className="w-full h-0.5 bg-gradient-to-r from-[#16C79A] via-[#1E3E62] to-transparent mt-1" />
+                        <p className="text-sm text-gray-300 font-sans leading-relaxed pt-1">
+                          Decentralization unlocks the true latent human capital of every district across our fertile delta by distributing corporate growth, higher education, and medical access.
+                        </p>
                       </div>
-                      <div className="p-4 rounded-2xl bg-white border border-black/15 space-y-2.5 shadow-sm">
+
+                      <div className="p-4 rounded-xl bg-[#0B192C] border border-[#1E3E62] space-y-3 shadow-md">
                         <div className="flex justify-between text-xs font-mono font-bold">
-                          <span className="text-[#DC2626] uppercase">Status-Quo</span>
-                          <span className="text-[#1746A2] uppercase">Decentralized Delta</span>
+                          <span className="text-[#DC2626] uppercase">STATUS-QUO (CENTRALIZED)</span>
+                          <span className="text-[#16C79A] uppercase">DECENTRALIZED DELTA</span>
                         </div>
-                        <input type="range" min="0" max="100" value={sliderVal} onChange={(e) => setSliderVal(Number(e.target.value))} className="w-full accent-[#1746A2] bg-black/10 h-2 rounded-lg cursor-pointer" />
-                        <p className="text-center font-mono text-[10px] text-gray-500 font-bold">LEVER: {sliderVal}% POLICY DEPLOYMENT</p>
+                        <input
+                          type="range"
+                          min="0"
+                          max="100"
+                          value={sliderVal}
+                          onChange={(e) => setSliderVal(Number(e.target.value))}
+                          className="w-full accent-[#16C79A] bg-[#000000] h-2.5 rounded-lg cursor-pointer"
+                        />
+                        <div className="flex justify-between items-center text-xs font-mono">
+                          <span className="text-gray-400">POLICY DEPLOYMENT LEVER</span>
+                          <span className="text-[#16C79A] font-bold text-sm">{sliderVal}% ACTIVE</span>
+                        </div>
                       </div>
-                      <button onClick={() => navigateToSlide(0)} className="px-4 py-2 rounded-xl bg-[#1746A2] text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-black transition-colors">
-                        <RefreshCw className="w-4 h-4" /> Replay Presentation
-                      </button>
+
+                      <div>
+                        <button
+                          onClick={() => navigateToSlide(0)}
+                          className="px-5 py-2.5 rounded-xl bg-[#1E3E62] text-white font-mono text-sm font-bold flex items-center gap-2 cursor-pointer hover:bg-[#16C79A] hover:text-black transition-colors border border-[#1E3E62]"
+                        >
+                          <RefreshCw className="w-4 h-4" /> Replay Presentation
+                        </button>
+                      </div>
                     </div>
-                    <div className="lg:col-span-7 flex flex-col justify-center">
+
+                    {/* RIGHT COLUMN: BANGLADESH MAP */}
+                    <div className="lg:col-span-5 flex flex-col justify-center items-center h-full">
                       <MapRenderer simulationValue={sliderVal} />
                     </div>
-                  </div>
-                  <div className="pt-2 flex justify-between items-center border-t border-black/15">
-                    <span className="text-xs font-mono text-gray-600 font-bold">Page 16 of 16 — Delta Simulator & Vision</span>
-                    <button onClick={() => navigateToSlide(0)} className="px-4 py-1.5 rounded-xl bg-black text-white font-mono text-xs font-bold flex items-center gap-2 cursor-pointer hover:bg-[#1746A2] transition-colors">
-                      Restart Presentation ↺
-                    </button>
                   </div>
                 </div>
               )}
@@ -657,47 +675,6 @@ export default function App() {
           </AnimatePresence>
         </div>
       </main>
-
-      {/* FOOTER BAR */}
-      <footer className="px-6 py-3 border-t border-black/10 bg-[#EBE7DF] z-30 flex items-center justify-between font-mono">
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500 font-bold">PAGE</span>
-          <span className="text-xs font-bold text-white bg-[#1746A2] px-2 py-0.5 rounded">
-            {String(currentSlide + 1).padStart(2, "0")} / {totalSlides}
-          </span>
-          <span className="text-xs text-black font-semibold hidden sm:inline ml-2 truncate max-w-[220px]">
-            — {slideHeaders[currentSlide].substring(4)}
-          </span>
-        </div>
-
-        {/* Next / Prev Navigation */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={handlePrev}
-            disabled={currentSlide === 0}
-            className={`p-2 rounded-lg border transition-all ${
-              currentSlide === 0
-                ? "border-black/5 opacity-30 cursor-not-allowed text-gray-400"
-                : "border-black/20 bg-white hover:bg-black/5 text-black cursor-pointer"
-            }`}
-            title="Previous Page"
-          >
-            <ChevronUp className="w-4 h-4" />
-          </button>
-          <button
-            onClick={handleNext}
-            disabled={currentSlide === totalSlides - 1}
-            className={`p-2 rounded-lg border transition-all ${
-              currentSlide === totalSlides - 1
-                ? "border-black/5 opacity-30 cursor-not-allowed text-gray-400"
-                : "border-black/20 bg-white hover:bg-black/5 text-black cursor-pointer"
-            }`}
-            title="Next Page"
-          >
-            <ChevronDown className="w-4 h-4" />
-          </button>
-        </div>
-      </footer>
     </div>
   );
 }

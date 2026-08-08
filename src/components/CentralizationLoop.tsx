@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { motion } from "motion/react";
-import { RefreshCw, ArrowRight, AlertTriangle } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { RefreshCw, ArrowRight, AlertTriangle, Building2, Users, AlertCircle, Layers, CheckCircle2 } from "lucide-react";
 
 interface LoopStep {
   step: number;
   title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+  color: string;
   desc: string;
   impact: string;
+  stat: string;
 }
 
 export default function CentralizationLoop() {
@@ -16,89 +20,145 @@ export default function CentralizationLoop() {
     {
       step: 1,
       title: "HQ & Resource Concentration",
-      desc: "Govt HQs, multi-nationals, specialized hospitals & top universities locate 80%+ facilities in Dhaka.",
-      impact: "Creates immediate deficit of high-tier services across 63 other districts."
+      subtitle: "The Origin Point",
+      icon: <Building2 className="w-5 h-5 text-[#16C79A]" />,
+      color: "#16C79A",
+      desc: "Govt ministries, MNC corporate headquarters, top tertiary hospitals, and elite universities concentrate 80%+ facilities strictly within Dhaka.",
+      impact: "Creates an immediate severe deficit of high-tier services across all 63 other districts.",
+      stat: "78% Corporate HQs & 84% Credit in Dhaka"
     },
     {
       step: 2,
       title: "Talent & Capital Flight",
-      desc: "Top graduates and business owners leave regional districts to access jobs and capital in Dhaka.",
-      impact: "Brain drain deprives local districts of innovation and tax revenue."
+      subtitle: "Forced Human Reaction",
+      icon: <Users className="w-5 h-5 text-[#3B82F6]" />,
+      color: "#3B82F6",
+      desc: "Top graduates, entrepreneurs, and skilled specialists are forced to leave regional hometowns to access career advancement, healthcare, and capital.",
+      impact: "Brain drain deprives regional economies of critical tax revenue, innovation, and leadership.",
+      stat: "1,724+ Migrants Enter Dhaka Every 24 Hours"
     },
     {
       step: 3,
       title: "Distressed Infrastructure",
-      desc: "Dhaka faces severe traffic congestion, housing inflations, and groundwater depletion.",
-      impact: "Daily economic waste exceeds ৳380M+ in traffic delays alone."
+      subtitle: "The Urban Collapse",
+      icon: <AlertCircle className="w-5 h-5 text-[#DC2626]" />,
+      color: "#DC2626",
+      desc: "Dhaka faces suffocating traffic gridlock, sky-high housing rent, severe air pollution, and catastrophic groundwater depletion.",
+      impact: "Annual economic waste exceeds ৳37,000Cr to ৳40,000Cr in lost labor hours and idling fuel alone.",
+      stat: "5 Million Commuter Hours Wasted Daily"
     },
     {
       step: 4,
       title: "Band-Aid Mega Projects",
-      desc: "Policymakers allocate 70%+ infrastructure budget back to Dhaka to relieve overcrowding.",
-      impact: "Further starves regional budgets, restarting the feedback loop."
+      subtitle: "The Perpetuating Policy Trap",
+      icon: <Layers className="w-5 h-5 text-[#F59E0B]" />,
+      color: "#F59E0B",
+      desc: "Policymakers react by funneling 70%+ of national infrastructure funding back into Dhaka flyovers and elevated expressways to treat symptoms.",
+      impact: "Further starves regional budgets of roads, hospitals, and universities, locking the spiral forever.",
+      stat: "70%+ National Urban Budget Sent to 1 Metro"
     }
   ];
 
   return (
-    <div className="w-full space-y-4 my-2 font-sans">
-      <div className="flex items-center justify-between border-b border-black/10 pb-2">
-        <div className="flex items-center gap-2">
-          <RefreshCw className="w-4 h-4 text-[#1746A2] animate-spin" style={{ animationDuration: "12s" }} />
-          <span className="text-xs font-mono uppercase font-bold text-gray-800">
-            THE SELF-REINFORCING FEEDBACK ENGINE
-          </span>
-        </div>
-        <span className="text-xs font-mono text-[#DC2626] font-bold">CLOSED SPIRAL</span>
-      </div>
-
-      {/* 4 Step Sequential Loop Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div className="w-full flex-1 flex flex-col justify-between gap-4 font-sans text-white">
+      {/* 4 Interactive Connected Feedback Stages */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
         {steps.map((item, idx) => {
           const isSelected = activeStep === idx;
           return (
             <div
               key={idx}
               onClick={() => setActiveStep(idx)}
-              className={`p-4 rounded-2xl border transition-all cursor-pointer space-y-2 relative overflow-hidden ${
+              className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between space-y-2 relative overflow-hidden ${
                 isSelected
-                  ? "bg-[#1746A2] text-white border-[#1746A2] shadow-md scale-[1.02]"
-                  : "bg-white text-black border-black/15 hover:border-black/40 hover:bg-black/5"
+                  ? "bg-[#1E3E62] border-[#16C79A] shadow-xl scale-[1.01] ring-1 ring-[#16C79A]/50"
+                  : "bg-[#0B192C]/80 border-[#1E3E62] hover:bg-[#1E3E62]/60"
               }`}
             >
               <div className="flex justify-between items-center">
-                <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${isSelected ? "bg-white text-[#1746A2]" : "bg-black/10 text-black"}`}>
-                  0{item.step}
+                <span className={`text-xs font-mono font-extrabold px-2.5 py-0.5 rounded ${isSelected ? "bg-[#16C79A] text-black" : "bg-[#1E3E62] text-[#16C79A] border border-[#1E3E62]"}`}>
+                  STAGE 0{item.step}
                 </span>
-                {idx < steps.length - 1 && (
-                  <ArrowRight className={`w-4 h-4 hidden lg:block ${isSelected ? "text-white" : "text-gray-400"}`} />
-                )}
+                <span className="p-1.5 rounded-lg bg-[#0B192C] border border-[#1E3E62]">
+                  {item.icon}
+                </span>
               </div>
 
-              <h4 className="text-sm font-bold font-serif leading-snug">{item.title}</h4>
-              <p className={`text-xs ${isSelected ? "text-white/90" : "text-gray-600"} leading-relaxed`}>{item.desc}</p>
+              <div>
+                <span className="text-[11px] font-mono text-gray-300 font-bold uppercase tracking-wider block">
+                  {item.subtitle}
+                </span>
+                <h4 className="text-base font-bold font-serif leading-snug text-white mt-0.5">
+                  {item.title}
+                </h4>
+              </div>
 
-              <div className={`pt-2 border-t text-[10px] font-mono ${isSelected ? "border-white/20 text-emerald-200" : "border-black/10 text-[#DC2626]"} font-bold`}>
-                IMPACT: {item.impact}
+              <p className="text-xs text-gray-200 leading-relaxed font-sans">
+                {item.desc}
+              </p>
+
+              <div className="pt-2 border-t border-[#1E3E62] space-y-1">
+                <span className="text-[10px] font-mono text-[#DC2626] font-bold block uppercase">
+                  LOCAL IMPACT:
+                </span>
+                <p className="text-xs text-gray-300 font-sans leading-tight">
+                  {item.impact}
+                </p>
+              </div>
+
+              <div className="pt-1 text-[11px] font-mono font-bold text-[#16C79A]">
+                {item.stat}
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* Bottom Summary Banner */}
-      <div className="p-4 rounded-2xl bg-white border border-black/15 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
+      {/* Central Feedback Loop Visual Connector Bar */}
+      <div className="p-4 rounded-2xl bg-[#0B192C] border border-[#1E3E62] shadow-xl flex flex-col lg:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-red-100 border border-red-300 flex items-center justify-center text-[#DC2626]">
-            <AlertTriangle className="w-5 h-5" />
+          <div className="w-10 h-10 rounded-xl bg-[#1E3E62] border border-[#16C79A]/40 flex items-center justify-center text-[#16C79A] flex-shrink-0">
+            <RefreshCw className="w-5 h-5 animate-spin" style={{ animationDuration: "14s" }} />
           </div>
           <div>
-            <h4 className="text-xs font-bold font-mono text-black uppercase">HOW TO BREAK THE SPIRAL?</h4>
-            <p className="text-xs text-gray-700">Decentralize high-tier education, corporate taxes, and ICU hospitals to regional hubs.</p>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono font-bold text-[#16C79A] uppercase tracking-wider">
+                FEEDBACK DIAGRAM:
+              </span>
+              <span className="text-xs font-mono font-bold text-white">
+                STAGE 0{steps[activeStep].step} ➔ {steps[activeStep].title}
+              </span>
+            </div>
+            <p className="text-xs text-gray-300 font-sans mt-0.5">
+              Each stage directly causes the next. Capital flight creates gridlock, which triggers mega-budgets, starving 63 districts.
+            </p>
           </div>
         </div>
 
-        <span className="text-xs font-mono font-bold text-[#1746A2] whitespace-nowrap bg-blue-50 px-3 py-1.5 rounded-xl border border-blue-200">
-          SOLUTION: MOVE OPPORTUNITY, NOT PEOPLE
+        <div className="flex items-center gap-2 font-mono text-xs text-gray-300 bg-[#1E3E62]/60 px-3 py-1.5 rounded-xl border border-[#1E3E62] whitespace-nowrap">
+          <span className="w-2 h-2 rounded-full bg-[#DC2626] animate-pulse" />
+          <span>STATUS: UNBROKEN CENTRALIZATION CYCLE</span>
+        </div>
+      </div>
+
+      {/* Bottom Solution & Policy Action Banner */}
+      <div className="p-4 rounded-2xl bg-[#1E3E62]/80 border border-[#16C79A]/60 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-[#16C79A]/20 border border-[#16C79A] flex items-center justify-center text-[#16C79A] flex-shrink-0">
+            <CheckCircle2 className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 className="text-sm font-bold font-mono text-[#16C79A] uppercase tracking-wider">
+              HOW TO BREAK THE SPIRAL? (SYSTEMIC DECENTRALIZATION)
+            </h4>
+            <p className="text-xs sm:text-sm text-white font-sans">
+              Provide corporate tax holidays outside Dhaka, build regional ICU hubs, and mandate 50% bank lending in 63 districts.
+            </p>
+          </div>
+        </div>
+
+        <span className="text-xs sm:text-sm font-mono font-extrabold text-black bg-[#16C79A] px-4 py-2 rounded-xl shadow-md whitespace-nowrap">
+          POLICY: MOVE OPPORTUNITY, NOT PEOPLE
         </span>
       </div>
     </div>
