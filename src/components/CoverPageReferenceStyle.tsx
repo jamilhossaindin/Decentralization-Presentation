@@ -78,7 +78,7 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
         {/* Left Column: Team-V Typography Title & Info */}
         <div className="lg:col-span-7 space-y-2">
           <div className="space-y-0">
-            <h1 className="text-[52px] sm:text-[58px] font-black font-display tracking-tighter leading-none text-[#16C79A] uppercase relative">
+            <h1 className="text-[50px] sm:text-[56px] font-black font-display tracking-tighter leading-none text-[#16C79A] uppercase relative">
               <span className="block drop-shadow-md text-[#16C79A]">TEAM-V</span>
             </h1>
             <div className="w-full h-0.5 bg-[#1E3E62] mt-1" />
@@ -104,9 +104,9 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
 
         {/* Right Column: Pure Official Team Logo in 1:1 Aspect Ratio (No Text) */}
         <div className="lg:col-span-5 flex justify-center items-center relative">
-          <div className="relative aspect-square w-48 sm:w-56 rounded-2xl bg-[#0B192C] border-2 border-[#1E3E62] p-4 shadow-xl flex items-center justify-center overflow-hidden group hover:border-[#16C79A] transition-all">
+          <div className="relative aspect-square w-40 sm:w-44 rounded-2xl bg-[#0B192C] border-2 border-[#1E3E62] p-3 shadow-xl flex items-center justify-center overflow-hidden group hover:border-[#16C79A] transition-all">
             {/* Pure Official Team Logo Image */}
-            <div className="w-full h-full rounded-xl overflow-hidden bg-white/95 flex items-center justify-center p-3 shadow-inner group-hover:scale-105 transition-transform duration-300">
+            <div className="w-full h-full rounded-xl overflow-hidden bg-white/95 flex items-center justify-center p-2.5 shadow-inner group-hover:scale-105 transition-transform duration-300">
               <img
                 src="/team_v_logo.png"
                 alt="Official Team Logo"
@@ -117,7 +117,7 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
         </div>
       </div>
 
-      {/* 5 TEAM MEMBERS ROW IN 4:3 RATIO */}
+      {/* 5 TEAM MEMBERS ROW IN UNIFORM BALANCED PORTRAIT RATIO */}
       <div className="pt-2 border-t border-[#1E3E62] z-10 relative">
         {/* 5 TEAM MEMBERS GRID */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
@@ -129,14 +129,14 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
               transition={{ delay: idx * 0.04, duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
               className="space-y-1.5 group cursor-pointer"
             >
-              {/* Member Photo Frame in 4:3 Aspect Ratio */}
-              <div className="aspect-[4/3] w-full bg-[#0B192C] rounded-xl overflow-hidden border border-[#1E3E62] shadow-md group-hover:border-[#16C79A] transition-all relative">
+              {/* Member Photo Frame with Uniform Proportions */}
+              <div className="aspect-[4/4.2] sm:aspect-[4/4] w-full bg-[#0B192C] rounded-xl overflow-hidden border border-[#1E3E62] shadow-md group-hover:border-[#16C79A] transition-all relative flex items-center justify-center">
                 <img
                   src={mem.img}
                   alt={`${mem.firstName} ${mem.lastName}`}
-                  className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                  className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
                 />
-                <div className="absolute top-1.5 left-1.5 bg-[#000000]/85 text-[#16C79A] border border-white/20 text-xs font-mono px-1.5 py-0.5 rounded font-bold backdrop-blur-xs">
+                <div className="absolute top-1.5 left-1.5 bg-[#000000]/85 text-[#16C79A] border border-white/20 text-xs font-mono px-1.5 py-0.5 rounded font-bold backdrop-blur-xs z-10">
                   {mem.num}
                 </div>
               </div>
