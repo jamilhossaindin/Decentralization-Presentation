@@ -9,41 +9,41 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
   const team = [
     {
       num: "01",
-      firstName: "AARYA",
-      lastName: "PRAJAPATI",
-      id: "ID: 24GDMM101",
-      role: "Creative Director & Lead Designer",
+      firstName: "SUMIT",
+      lastName: "ZAMAN",
+      id: "ID: 222031003",
+      role: "Team Leader & Creative Director",
       img: "/avatars/member1.png"
     },
     {
       num: "02",
-      firstName: "DEVANSH",
-      lastName: "RANA",
-      id: "ID: 24GDMM102",
+      firstName: "NABILA",
+      lastName: "TABASSUM",
+      id: "ID: 222031008",
       role: "System Architect & Interaction Lead",
       img: "/avatars/member2.png"
     },
     {
       num: "03",
-      firstName: "MEERA",
-      lastName: "IYER",
-      id: "ID: 24GDMM103",
+      firstName: "NILOY",
+      lastName: "DAS",
+      id: "ID: 222031009",
       role: "Brand Strategist & Copywriter",
       img: "/avatars/member3.png"
     },
     {
       num: "04",
-      firstName: "RITVIK",
-      lastName: "SINGH",
-      id: "ID: 24GDMM104",
+      firstName: "NAZMUS",
+      lastName: "SADAT",
+      id: "ID: 222031027",
       role: "Data Visualizer & Economist",
       img: "/avatars/member4.png"
     },
     {
       num: "05",
-      firstName: "SANA",
-      lastName: "SAPOOR",
-      id: "ID: 24GDMM105",
+      firstName: "JAMIL",
+      lastName: "HOSSAIN",
+      id: "ID: 222021040",
       role: "Campaign Operations & PR Lead",
       img: "/avatars/member5.png"
     }
