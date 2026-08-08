@@ -102,27 +102,16 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
           </div>
         </div>
 
-        {/* Right Column: High-Res Official Team-V Logo in 1:1 Aspect Ratio */}
+        {/* Right Column: Pure Official Team Logo in 1:1 Aspect Ratio (No Text) */}
         <div className="lg:col-span-5 flex justify-center items-center relative">
-          <div className="relative aspect-square w-48 sm:w-56 rounded-2xl bg-[#0B192C] border-2 border-[#1E3E62] p-4 shadow-xl flex items-center justify-center overflow-hidden group">
-            {/* Corner Tech Badges */}
-            <div className="absolute top-2 left-2 text-[10px] font-mono bg-[#000000] text-[#16C79A] border border-[#1E3E62] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
-              OFFICIAL LOGO • 1:1
-            </div>
-            <div className="absolute top-2 right-2 text-[10px] font-mono text-[#16C79A] font-bold">
-              GROUP 05
-            </div>
-
-            {/* Official Team-V Logo Image */}
-            <img
-              src="/team_v_logo.png"
-              alt="Team Five Official Logo"
-              className="w-full h-full object-contain relative z-10 drop-shadow-md group-hover:scale-105 transition-transform duration-300 p-2"
-            />
-
-            {/* Bottom Tagline Overlay */}
-            <div className="absolute bottom-2 inset-x-2 text-center text-[10px] font-mono bg-[#000000]/90 text-white border border-[#1E3E62] px-2 py-0.5 rounded font-bold uppercase tracking-widest z-10">
-              TEAM-V • SHANTO-MARIAM UNIVERSITY
+          <div className="relative aspect-square w-48 sm:w-56 rounded-2xl bg-[#0B192C] border-2 border-[#1E3E62] p-4 shadow-xl flex items-center justify-center overflow-hidden group hover:border-[#16C79A] transition-all">
+            {/* Pure Official Team Logo Image */}
+            <div className="w-full h-full rounded-xl overflow-hidden bg-white/95 flex items-center justify-center p-3 shadow-inner group-hover:scale-105 transition-transform duration-300">
+              <img
+                src="/team_v_logo.png"
+                alt="Official Team Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
           </div>
         </div>
