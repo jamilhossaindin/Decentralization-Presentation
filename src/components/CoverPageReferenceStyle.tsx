@@ -12,7 +12,6 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
       firstName: "SUMIT",
       lastName: "ZAMAN",
       id: "ID: 222031003",
-      role: "Team Leader & Creative Director",
       img: "/avatars/member1.png"
     },
     {
@@ -20,7 +19,6 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
       firstName: "NABILA",
       lastName: "TABASSUM",
       id: "ID: 222031008",
-      role: "System Architect & Interaction Lead",
       img: "/avatars/member2.png"
     },
     {
@@ -28,7 +26,6 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
       firstName: "NILOY",
       lastName: "DAS",
       id: "ID: 222031009",
-      role: "Brand Strategist & Copywriter",
       img: "/avatars/member3.png"
     },
     {
@@ -36,7 +33,6 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
       firstName: "NAZMUS",
       lastName: "SADAT",
       id: "ID: 222031027",
-      role: "Data Visualizer & Economist",
       img: "/avatars/member4.png"
     },
     {
@@ -44,7 +40,6 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
       firstName: "JAMIL",
       lastName: "HOSSAIN",
       id: "ID: 222021040",
-      role: "Campaign Operations & PR Lead",
       img: "/avatars/member5.png"
     }
   ];
@@ -133,16 +128,16 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
         </div>
       </div>
 
-      {/* 5 TEAM MEMBERS ROW IN 4:3 RATIO */}
+      {/* 5 TEAM MEMBERS ROW IN 4:3 RATIO (NAME & ID ONLY) */}
       <div className="pt-2 border-t border-[#1E3E62] space-y-2 z-10 relative">
         <div className="flex items-center gap-2 text-xs font-mono">
           <span className="font-bold text-[#16C79A] uppercase tracking-wider border-b-2 border-[#16C79A] pb-0.5">
-            THE 5 CREATIVE TEAM MEMBERS (4:3 RATIO)
+            THE 5 CREATIVE TEAM MEMBERS
           </span>
           <div className="flex-1 h-px bg-[#1E3E62]" />
         </div>
 
-        {/* 5 TEAM MEMBERS GRID (4:3 Aspect Ratio) */}
+        {/* 5 TEAM MEMBERS GRID */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           {team.map((mem, idx) => (
             <motion.div
@@ -164,13 +159,12 @@ export default function CoverPageReferenceStyle({ onNext }: CoverPageProps) {
                 </div>
               </div>
 
-              {/* Member Details */}
+              {/* Member Name and ID Only */}
               <div className="space-y-0.5">
                 <div className="text-xs font-bold font-mono text-[#16C79A] leading-tight truncate">
                   {mem.firstName} {mem.lastName}
                 </div>
                 <p className="text-[11px] font-mono text-gray-300 font-semibold">{mem.id}</p>
-                <p className="text-[10px] font-mono text-gray-400 truncate leading-none">{mem.role}</p>
               </div>
             </motion.div>
           ))}
