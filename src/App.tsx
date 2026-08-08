@@ -499,10 +499,11 @@ export default function App() {
                         FIRST-PRINCIPLES INSIGHT
                       </span>
 
-                      {/* Main Big Statement */}
-                      <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black font-serif text-[#16C79A] leading-tight drop-shadow-md">
-                        We Have Been Solving the <br />
-                        <span className="text-white">Wrong Problem</span>
+                      {/* Main Big Statement in 3 Rows */}
+                      <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black font-serif leading-tight drop-shadow-md space-y-1">
+                        <span className="block text-[#16C79A]">We Have Been</span>
+                        <span className="block text-[#16C79A]">Solving the</span>
+                        <span className="block text-white">Wrong Problem</span>
                       </h2>
 
                       <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[#16C79A] to-transparent rounded-full" />

@@ -97,8 +97,10 @@ export default function ParadigmShiftVisual() {
               <Sparkles className="w-3.5 h-3.5" />
               THE PARADIGM SHIFT IN BANGLADESH URBAN POLICY
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black font-serif text-white leading-tight">
-              We Have Been Solving the <span className="text-[#16C79A]">Wrong Problem</span>
+            <h2 className="text-2xl sm:text-3xl font-black font-serif leading-tight space-y-0.5">
+              <span className="block text-[#16C79A]">We Have Been</span>
+              <span className="block text-[#16C79A]">Solving the</span>
+              <span className="block text-white">Wrong Problem</span>
             </h2>
             <p className="text-sm sm:text-base italic text-[#16C79A] font-serif font-bold pt-0.5">
               “People don’t move because they love cities. They move because opportunity moves first.”
